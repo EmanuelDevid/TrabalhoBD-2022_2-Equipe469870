@@ -6,21 +6,21 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+SET SQL_SAFE_UPDATES = 0;
+-- -----------------------------------------------------
+-- Schema nullbank_469870
+-- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema nullbank_469870
 -- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `nullbank_469870` DEFAULT CHARACTER SET utf8 ;
+USE `nullbank_469870` ;
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Table `nullbank_469870`.`Agencia`
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
-
--- -----------------------------------------------------
--- Table `mydb`.`Agencia`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Agencia` (
+CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Agencia` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `salário_montante_total` DECIMAL(18,2) NOT NULL,
@@ -30,9 +30,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Funcionarios`
+-- Table `nullbank_469870`.`Funcionarios`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Funcionarios` (
+CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Funcionarios` (
   `matricula` INT NOT NULL AUTO_INCREMENT,
   `nome_completo` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(45) NOT NULL,
@@ -47,16 +47,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Funcionarios` (
   INDEX `fk_funcionarios_agência1_idx` (`agência_id` ASC) VISIBLE,
   CONSTRAINT `fk_funcionarios_agência1`
     FOREIGN KEY (`agência_id`)
-    REFERENCES `mydb`.`Agencia` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `nullbank_469870`.`Agencia` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Dependentes`
+-- Table `nullbank_469870`.`Dependentes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Dependentes` (
+CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Dependentes` (
   `nome_completo` VARCHAR(45) NOT NULL,
   `data_nasc` DATE NOT NULL,
   `parentesco` VARCHAR(45) NOT NULL,
@@ -66,16 +66,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Dependentes` (
   INDEX `fk_Dependentes_funcionarios1_idx` (`funcionarios_matricula` ASC) VISIBLE,
   CONSTRAINT `fk_Dependentes_funcionarios1`
     FOREIGN KEY (`funcionarios_matricula`)
-    REFERENCES `mydb`.`Funcionarios` (`matricula`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `nullbank_469870`.`Funcionarios` (`matricula`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Clientes`
+-- Table `nullbank_469870`.`Clientes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Clientes` (
+CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Clientes` (
   `cpf` VARCHAR(11) NOT NULL,
   `nome_completo` VARCHAR(45) NOT NULL,
   `rg` VARCHAR(11) NOT NULL,
@@ -94,41 +94,41 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Telefones`
+-- Table `nullbank_469870`.`Telefones`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Telefones` (
+CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Telefones` (
   `telefone` VARCHAR(15) NOT NULL,
   `Contas_cpf` VARCHAR(11) NOT NULL,
   PRIMARY KEY (`telefone`, `Contas_cpf`),
   INDEX `fk_telefones_Contas_idx` (`Contas_cpf` ASC) VISIBLE,
   CONSTRAINT `fk_telefones_Contas`
     FOREIGN KEY (`Contas_cpf`)
-    REFERENCES `mydb`.`Clientes` (`cpf`)
+    REFERENCES `nullbank_469870`.`Clientes` (`cpf`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Emails`
+-- Table `nullbank_469870`.`Emails`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Emails` (
+CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Emails` (
   `Contas_cpf` VARCHAR(11) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   INDEX `fk_Emails_Contas1_idx` (`Contas_cpf` ASC) VISIBLE,
   PRIMARY KEY (`Contas_cpf`, `email`),
   CONSTRAINT `fk_Emails_Contas1`
     FOREIGN KEY (`Contas_cpf`)
-    REFERENCES `mydb`.`Clientes` (`cpf`)
+    REFERENCES `nullbank_469870`.`Clientes` (`cpf`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Contas`
+-- Table `nullbank_469870`.`Contas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Contas` (
+CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Contas` (
   `num_conta` INT NOT NULL AUTO_INCREMENT,
   `agência_id` INT NOT NULL,
   `saldo` DECIMAL(18,2) NOT NULL,
@@ -141,66 +141,66 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Contas` (
   INDEX `fk_Contas_funcionarios1_idx` (`gerente_matricula` ASC) VISIBLE,
   CONSTRAINT `fk_Contas_agência1`
     FOREIGN KEY (`agência_id`)
-    REFERENCES `mydb`.`Agencia` (`id`)
+    REFERENCES `nullbank_469870`.`Agencia` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Contas_funcionarios1`
     FOREIGN KEY (`gerente_matricula`)
-    REFERENCES `mydb`.`Funcionarios` (`matricula`)
+    REFERENCES `nullbank_469870`.`Funcionarios` (`matricula`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Poupanca`
+-- Table `nullbank_469870`.`Poupanca`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Poupanca` (
+CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Poupanca` (
   `taxa_juros` FLOAT NOT NULL,
   `Contas_num_conta` INT NOT NULL,
   PRIMARY KEY (`Contas_num_conta`),
   CONSTRAINT `fk_Poupanca_Contas1`
     FOREIGN KEY (`Contas_num_conta`)
-    REFERENCES `mydb`.`Contas` (`num_conta`)
+    REFERENCES `nullbank_469870`.`Contas` (`num_conta`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Especial`
+-- Table `nullbank_469870`.`Especial`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Especial` (
+CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Especial` (
   `limite_credito` DECIMAL(18,2) NOT NULL,
   `Contas_num_conta` INT NOT NULL,
   PRIMARY KEY (`Contas_num_conta`),
   CONSTRAINT `fk_Especial_Contas1`
     FOREIGN KEY (`Contas_num_conta`)
-    REFERENCES `mydb`.`Contas` (`num_conta`)
+    REFERENCES `nullbank_469870`.`Contas` (`num_conta`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Corrente`
+-- Table `nullbank_469870`.`Corrente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Corrente` (
+CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Corrente` (
   `data_aniver_contrato` DATE NOT NULL,
   `Contas_num_conta` INT NOT NULL,
   PRIMARY KEY (`Contas_num_conta`),
   CONSTRAINT `fk_Corrente_Contas1`
     FOREIGN KEY (`Contas_num_conta`)
-    REFERENCES `mydb`.`Contas` (`num_conta`)
+    REFERENCES `nullbank_469870`.`Contas` (`num_conta`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Possui`
+-- Table `nullbank_469870`.`Possui`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Possui` (
+CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Possui` (
   `Clientes_cpf` VARCHAR(11) NOT NULL,
   `Contas_num_conta` INT NOT NULL,
   PRIMARY KEY (`Clientes_cpf`, `Contas_num_conta`),
@@ -208,21 +208,21 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Possui` (
   INDEX `fk_Clientes_has_Contas_Clientes1_idx` (`Clientes_cpf` ASC) VISIBLE,
   CONSTRAINT `fk_Clientes_has_Contas_Clientes1`
     FOREIGN KEY (`Clientes_cpf`)
-    REFERENCES `mydb`.`Clientes` (`cpf`)
+    REFERENCES `nullbank_469870`.`Clientes` (`cpf`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Clientes_has_Contas_Contas1`
     FOREIGN KEY (`Contas_num_conta`)
-    REFERENCES `mydb`.`Contas` (`num_conta`)
+    REFERENCES `nullbank_469870`.`Contas` (`num_conta`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Transacao`
+-- Table `nullbank_469870`.`Transacao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Transacao` (
+CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Transacao` (
   `num_transacao` INT NOT NULL AUTO_INCREMENT,
   `tipo_transacao` ENUM('saque', 'depósito', 'pagamento', 'estorno', 'transferência') NOT NULL,
   `data-hora` DATETIME NOT NULL,
@@ -232,11 +232,22 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Transacao` (
   INDEX `fk_Tansacao_Contas1_idx` (`Contas_num_conta` ASC) VISIBLE,
   CONSTRAINT `fk_Tansacao_Contas1`
     FOREIGN KEY (`Contas_num_conta`)
-    REFERENCES `mydb`.`Contas` (`num_conta`)
+    REFERENCES `nullbank_469870`.`Contas` (`num_conta`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+
+-- Criação do trigger responsável por cálculo da idade com base na data de nascimento
+DROP TRIGGER IF EXISTS `nullbank_469870`.`tr_idade`;
+
+DELIMITER $$
+USE `nullbank_469870`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `nullbank_469870`.`tr_idade` BEFORE INSERT ON `dependentes` FOR EACH ROW
+BEGIN
+SET NEW.idade = TRUNCATE(DATEDIFF(CURDATE(), NEW.data_nasc)/365.25, 0);
+END$$
+DELIMITER ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema nullbank_469870
+-- Schema Equipe469870
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema nullbank_469870
+-- Schema Equipe469870
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `nullbank_469870` DEFAULT CHARACTER SET utf8 ;
-USE `nullbank_469870` ;
+CREATE SCHEMA IF NOT EXISTS `Equipe469870` DEFAULT CHARACTER SET utf8 ;
+USE `Equipe469870` ;
 
 -- -----------------------------------------------------
--- Table `nullbank_469870`.`Agencia`
+-- Table `Equipe469870`.`Agencia`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Agencia` (
+CREATE TABLE IF NOT EXISTS `Equipe469870`.`Agencia` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   `salario_montante_total` DECIMAL(18,2) NOT NULL,
@@ -30,9 +30,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nullbank_469870`.`Funcionarios`
+-- Table `Equipe469870`.`Funcionarios`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Funcionarios` (
+CREATE TABLE IF NOT EXISTS `Equipe469870`.`Funcionarios` (
   `matricula` INT NOT NULL AUTO_INCREMENT,
   `nome_completo` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(45) NOT NULL,
@@ -47,16 +47,16 @@ CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Funcionarios` (
   INDEX `fk_funcionarios_agência1_idx` (`agencia_id` ASC) VISIBLE,
   CONSTRAINT `fk_funcionarios_agência1`
     FOREIGN KEY (`agencia_id`)
-    REFERENCES `nullbank_469870`.`Agencia` (`id`)
+    REFERENCES `Equipe469870`.`Agencia` (`id`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nullbank_469870`.`Dependentes`
+-- Table `Equipe469870`.`Dependentes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Dependentes` (
+CREATE TABLE IF NOT EXISTS `Equipe469870`.`Dependentes` (
   `nome_completo` VARCHAR(45) NOT NULL,
   `data_nasc` DATE NOT NULL,
   `parentesco` VARCHAR(45) NOT NULL,
@@ -66,16 +66,16 @@ CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Dependentes` (
   INDEX `fk_Dependentes_funcionarios1_idx` (`funcionarios_matricula` ASC) VISIBLE,
   CONSTRAINT `fk_Dependentes_funcionarios1`
     FOREIGN KEY (`funcionarios_matricula`)
-    REFERENCES `nullbank_469870`.`Funcionarios` (`matricula`)
+    REFERENCES `Equipe469870`.`Funcionarios` (`matricula`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nullbank_469870`.`Clientes`
+-- Table `Equipe469870`.`Clientes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Clientes` (
+CREATE TABLE IF NOT EXISTS `Equipe469870`.`Clientes` (
   `cpf` VARCHAR(11) NOT NULL,
   `nome_completo` VARCHAR(45) NOT NULL,
   `rg` VARCHAR(11) NOT NULL,
@@ -94,41 +94,41 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nullbank_469870`.`Telefones`
+-- Table `Equipe469870`.`Telefones`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Telefones` (
+CREATE TABLE IF NOT EXISTS `Equipe469870`.`Telefones` (
   `telefone` VARCHAR(15) NOT NULL,
   `Clientes_cpf` VARCHAR(11) NOT NULL,
   PRIMARY KEY (`telefone`, `Clientes_cpf`),
   INDEX `fk_telefones_Contas_idx` (`Clientes_cpf` ASC) VISIBLE,
   CONSTRAINT `fk_telefones_Contas`
     FOREIGN KEY (`Clientes_cpf`)
-    REFERENCES `nullbank_469870`.`Clientes` (`cpf`)
+    REFERENCES `Equipe469870`.`Clientes` (`cpf`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nullbank_469870`.`Emails`
+-- Table `Equipe469870`.`Emails`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Emails` (
+CREATE TABLE IF NOT EXISTS `Equipe469870`.`Emails` (
   `Clientes_cpf` VARCHAR(11) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   INDEX `fk_Emails_Contas1_idx` (`Clientes_cpf` ASC) VISIBLE,
   PRIMARY KEY (`Clientes_cpf`, `email`),
   CONSTRAINT `fk_Emails_Contas1`
     FOREIGN KEY (`Clientes_cpf`)
-    REFERENCES `nullbank_469870`.`Clientes` (`cpf`)
+    REFERENCES `Equipe469870`.`Clientes` (`cpf`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nullbank_469870`.`Contas`
+-- Table `Equipe469870`.`Contas`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Contas` (
+CREATE TABLE IF NOT EXISTS `Equipe469870`.`Contas` (
   `num_conta` INT NOT NULL AUTO_INCREMENT,
   `agencia_id` INT NOT NULL,
   `saldo` DECIMAL(18,2) NOT NULL,
@@ -141,66 +141,66 @@ CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Contas` (
   INDEX `fk_Contas_funcionarios1_idx` (`gerente_matricula` ASC) VISIBLE,
   CONSTRAINT `fk_Contas_agência1`
     FOREIGN KEY (`agencia_id`)
-    REFERENCES `nullbank_469870`.`Agencia` (`id`)
+    REFERENCES `Equipe469870`.`Agencia` (`id`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE,
   CONSTRAINT `fk_Contas_funcionarios1`
     FOREIGN KEY (`gerente_matricula`)
-    REFERENCES `nullbank_469870`.`Funcionarios` (`matricula`)
+    REFERENCES `Equipe469870`.`Funcionarios` (`matricula`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nullbank_469870`.`Poupanca`
+-- Table `Equipe469870`.`Poupanca`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Poupanca` (
+CREATE TABLE IF NOT EXISTS `Equipe469870`.`Poupanca` (
   `taxa_juros` FLOAT NOT NULL,
   `Contas_num_conta` INT NOT NULL,
   PRIMARY KEY (`Contas_num_conta`),
   CONSTRAINT `fk_Poupanca_Contas1`
     FOREIGN KEY (`Contas_num_conta`)
-    REFERENCES `nullbank_469870`.`Contas` (`num_conta`)
+    REFERENCES `Equipe469870`.`Contas` (`num_conta`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nullbank_469870`.`Especial`
+-- Table `Equipe469870`.`Especial`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Especial` (
+CREATE TABLE IF NOT EXISTS `Equipe469870`.`Especial` (
   `limite_credito` DECIMAL(18,2) NOT NULL,
   `Contas_num_conta` INT NOT NULL,
   PRIMARY KEY (`Contas_num_conta`),
   CONSTRAINT `fk_Especial_Contas1`
     FOREIGN KEY (`Contas_num_conta`)
-    REFERENCES `nullbank_469870`.`Contas` (`num_conta`)
+    REFERENCES `Equipe469870`.`Contas` (`num_conta`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nullbank_469870`.`Corrente`
+-- Table `Equipe469870`.`Corrente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Corrente` (
+CREATE TABLE IF NOT EXISTS `Equipe469870`.`Corrente` (
   `data_aniver_contrato` DATE NOT NULL,
   `Contas_num_conta` INT NOT NULL,
   PRIMARY KEY (`Contas_num_conta`),
   CONSTRAINT `fk_Corrente_Contas1`
     FOREIGN KEY (`Contas_num_conta`)
-    REFERENCES `nullbank_469870`.`Contas` (`num_conta`)
+    REFERENCES `Equipe469870`.`Contas` (`num_conta`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nullbank_469870`.`Possui`
+-- Table `Equipe469870`.`Possui`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Possui` (
+CREATE TABLE IF NOT EXISTS `Equipe469870`.`Possui` (
   `Clientes_cpf` VARCHAR(11) NOT NULL,
   `Contas_num_conta` INT NOT NULL,
   `Contas_agencia_id` INT NOT NULL,
@@ -210,26 +210,26 @@ CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Possui` (
   INDEX `fk_Clientes_has_Contas_Contas2_idx_idx` (`Contas_agencia_id` ASC) VISIBLE,
   CONSTRAINT `fk_Clientes_has_Contas_Clientes1`
     FOREIGN KEY (`Clientes_cpf`)
-    REFERENCES `nullbank_469870`.`Clientes` (`cpf`)
+    REFERENCES `Equipe469870`.`Clientes` (`cpf`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE,
   CONSTRAINT `fk_Clientes_has_Contas_Contas1`
     FOREIGN KEY (`Contas_num_conta`)
-    REFERENCES `nullbank_469870`.`Contas` (`num_conta`)
+    REFERENCES `Equipe469870`.`Contas` (`num_conta`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE,
   CONSTRAINT `fk_Clientes_has_Contas_Contas2_idx`
     FOREIGN KEY (`Contas_agencia_id`)
-    REFERENCES `nullbank_469870`.`Contas` (`agencia_id`)
+    REFERENCES `Equipe469870`.`Contas` (`agencia_id`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nullbank_469870`.`Transacao`
+-- Table `Equipe469870`.`Transacao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Transacao` (
+CREATE TABLE IF NOT EXISTS `Equipe469870`.`Transacao` (
   `num_transacao` INT NOT NULL AUTO_INCREMENT,
   `tipo_transacao` ENUM('saque', 'depósito', 'pagamento', 'estorno', 'transferência') NOT NULL,
   `data_hora` DATETIME NOT NULL,
@@ -239,18 +239,18 @@ CREATE TABLE IF NOT EXISTS `nullbank_469870`.`Transacao` (
   INDEX `fk_Tansacao_Contas1_idx` (`Contas_num_conta` ASC) VISIBLE,
   CONSTRAINT `fk_Tansacao_Contas1`
     FOREIGN KEY (`Contas_num_conta`)
-    REFERENCES `nullbank_469870`.`Contas` (`num_conta`)
+    REFERENCES `Equipe469870`.`Contas` (`num_conta`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- Criação do trigger responsável por cálculo da idade com base na data de nascimento
-DROP TRIGGER IF EXISTS `nullbank_469870`.`tr_idade`;
+DROP TRIGGER IF EXISTS `Equipe469870`.`tr_idade`;
 
 DELIMITER $$
-USE `nullbank_469870`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `nullbank_469870`.`tr_idade` BEFORE INSERT ON `Dependentes` FOR EACH ROW
+USE `Equipe469870`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `Equipe469870`.`tr_idade` BEFORE INSERT ON `Dependentes` FOR EACH ROW
 BEGIN
 SET NEW.idade = TRUNCATE(DATEDIFF(CURDATE(), NEW.data_nasc)/365.25, 0);
 END$$
@@ -258,11 +258,11 @@ DELIMITER ;
 
 
 -- Criação do trigger responsável por controlar a inserção de dependentes pra cada funcionário
-DROP TRIGGER IF EXISTS `nullbank_469870`.`tr_numero_dependentes`;
+DROP TRIGGER IF EXISTS `Equipe469870`.`tr_numero_dependentes`;
 
 DELIMITER $$
-USE `nullbank_469870`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `nullbank_469870`.`tr_numero_dependentes` BEFORE INSERT ON `Dependentes` FOR EACH ROW
+USE `Equipe469870`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `Equipe469870`.`tr_numero_dependentes` BEFORE INSERT ON `Dependentes` FOR EACH ROW
 BEGIN
 	IF (SELECT COUNT(nome_completo) FROM  dependentes) >= 5 THEN
       SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Already five rows dependentes';
@@ -272,11 +272,11 @@ DELIMITER ;
 
 
 -- Criação do trigger responsável por garantir o salário mínimo de 2500.00 para os funcionário
-DROP TRIGGER IF EXISTS `nullbank_469870`.`tr_salario_minimo`;
+DROP TRIGGER IF EXISTS `Equipe469870`.`tr_salario_minimo`;
 
 DELIMITER $$
-USE `nullbank_469870`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `nullbank_469870`.`tr_salario_minimo` BEFORE INSERT ON `Funcionarios` FOR EACH ROW
+USE `Equipe469870`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `Equipe469870`.`tr_salario_minimo` BEFORE INSERT ON `Funcionarios` FOR EACH ROW
 BEGIN
 	IF NEW.salario < 2500.00 THEN
 		SET NEW.salario = 2500.00;
@@ -286,11 +286,11 @@ DELIMITER ;
 
 
 -- Criação do trigger responsável por garantir que o saldo inicial de uma conta seja 0.00
-DROP TRIGGER IF EXISTS `nullbank_469870`.`tr_saldo_inicial_conta`;
+DROP TRIGGER IF EXISTS `Equipe469870`.`tr_saldo_inicial_conta`;
 
 DELIMITER $$
-USE `nullbank_469870`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `nullbank_469870`.`tr_saldo_inicial_conta` BEFORE INSERT ON `Contas` FOR EACH ROW
+USE `Equipe469870`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `Equipe469870`.`tr_saldo_inicial_conta` BEFORE INSERT ON `Contas` FOR EACH ROW
 BEGIN
 	IF NEW.saldo > 0 THEN
 		SET NEW.saldo = 0.00;
@@ -300,67 +300,67 @@ DELIMITER ;
 
 
 -- Criação do trigger responsável por atualizar o saldo das contas a cada transação
-DROP TRIGGER IF EXISTS `nullbank_469870`.`tr_transacao`;
+DROP TRIGGER IF EXISTS `Equipe469870`.`tr_transacao`;
 
 DELIMITER $$
-USE `nullbank_469870`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `nullbank_469870`.`tr_transacao` AFTER INSERT ON `Transacao` FOR EACH ROW
+USE `Equipe469870`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `Equipe469870`.`tr_transacao` AFTER INSERT ON `Transacao` FOR EACH ROW
 BEGIN
 	IF (NEW.tipo_transacao = 'saque' AND ((SELECT saldo FROM Contas WHERE num_conta = NEW.Contas_num_conta) >= NEW.valor)) THEN
-		UPDATE `nullbank_469870`.`Contas` SET saldo = saldo - NEW.valor WHERE num_conta = NEW.Contas_num_conta;
+		UPDATE `Equipe469870`.`Contas` SET saldo = saldo - NEW.valor WHERE num_conta = NEW.Contas_num_conta;
     ELSEIF (NEW.tipo_transacao = 'depósito' OR NEW.tipo_transacao = 'estorno') THEN
-		UPDATE `nullbank_469870`.`Contas` SET saldo = saldo + NEW.valor WHERE num_conta = NEW.Contas_num_conta;
+		UPDATE `Equipe469870`.`Contas` SET saldo = saldo + NEW.valor WHERE num_conta = NEW.Contas_num_conta;
     ELSEIF (NEW.tipo_transacao = 'pagamento' AND ((SELECT saldo FROM Contas WHERE num_conta = NEW.Contas_num_conta) >= NEW.valor)) THEN
-		UPDATE `nullbank_469870`.`Contas` SET saldo = saldo - NEW.valor WHERE num_conta = NEW.Contas_num_conta;    
+		UPDATE `Equipe469870`.`Contas` SET saldo = saldo - NEW.valor WHERE num_conta = NEW.Contas_num_conta;    
     ELSEIF (NEW.tipo_transacao = 'transferência' AND ((SELECT saldo FROM Contas WHERE num_conta = NEW.Contas_num_conta) >= NEW.valor)) THEN
-		UPDATE `nullbank_469870`.`Contas` SET saldo = saldo - NEW.valor WHERE num_conta = NEW.Contas_num_conta;
+		UPDATE `Equipe469870`.`Contas` SET saldo = saldo - NEW.valor WHERE num_conta = NEW.Contas_num_conta;
     END IF;
 END$$
 DELIMITER ;
 
 
 -- Criação do trigger responsável por atualizar o salário montante total após uma inserção de funcionário
-DROP TRIGGER IF EXISTS `nullbank_469870`.`tr_montante_total_insert`;
+DROP TRIGGER IF EXISTS `Equipe469870`.`tr_montante_total_insert`;
 
 DELIMITER $$
-USE `nullbank_469870`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `nullbank_469870`.`tr_montante_total_insert` AFTER INSERT ON `Funcionarios` FOR EACH ROW
+USE `Equipe469870`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `Equipe469870`.`tr_montante_total_insert` AFTER INSERT ON `Funcionarios` FOR EACH ROW
 BEGIN
-	UPDATE `nullbank_469870`.`Agencia` SET salario_montante_total = salario_montante_total + NEW.salario WHERE id = NEW.agencia_id;
+	UPDATE `Equipe469870`.`Agencia` SET salario_montante_total = salario_montante_total + NEW.salario WHERE id = NEW.agencia_id;
 END$$
 DELIMITER ;
 
 
 -- Criação do trigger responsável por atualizar o salário montante total após uma remoção de funcionário
-DROP TRIGGER IF EXISTS `nullbank_469870`.`tr_montante_total_delete`;
+DROP TRIGGER IF EXISTS `Equipe469870`.`tr_montante_total_delete`;
 
 DELIMITER $$
-USE `nullbank_469870`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `nullbank_469870`.`tr_montante_total_delete` AFTER DELETE ON `Funcionarios` FOR EACH ROW
+USE `Equipe469870`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `Equipe469870`.`tr_montante_total_delete` AFTER DELETE ON `Funcionarios` FOR EACH ROW
 BEGIN
-	UPDATE `nullbank_469870`.`Agencia` SET salario_montante_total = salario_montante_total - OLD.salario WHERE id = OLD.agencia_id;
+	UPDATE `Equipe469870`.`Agencia` SET salario_montante_total = salario_montante_total - OLD.salario WHERE id = OLD.agencia_id;
 END$$
 DELIMITER ;
 
 
 -- Criação do trigger responsável por atualizar o salário montante total após uma atualização de funcionário
-DROP TRIGGER IF EXISTS `nullbank_469870`.`tr_montante_total_update`;
+DROP TRIGGER IF EXISTS `Equipe469870`.`tr_montante_total_update`;
 
 DELIMITER $$
-USE `nullbank_469870`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `nullbank_469870`.`tr_montante_total_update` AFTER UPDATE ON `Funcionarios` FOR EACH ROW
+USE `Equipe469870`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `Equipe469870`.`tr_montante_total_update` AFTER UPDATE ON `Funcionarios` FOR EACH ROW
 BEGIN
-	UPDATE `nullbank_469870`.`Agencia` SET salario_montante_total = salario_montante_total + NEW.salario - OLD.salario WHERE id = NEW.agencia_id;
+	UPDATE `Equipe469870`.`Agencia` SET salario_montante_total = salario_montante_total + NEW.salario - OLD.salario WHERE id = NEW.agencia_id;
 END$$
 DELIMITER ;
 
 
 -- Criação do trigger responsável por garantir que o salário montante total inicial de uma agencia seja 0.00
-DROP TRIGGER IF EXISTS `nullbank_469870`.`tr_salario_montante_total_inicial`;
+DROP TRIGGER IF EXISTS `Equipe469870`.`tr_salario_montante_total_inicial`;
 
 DELIMITER $$
-USE `nullbank_469870`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `nullbank_469870`.`tr_salario_montante_total_inicial` BEFORE INSERT ON `Agencia` FOR EACH ROW
+USE `Equipe469870`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `Equipe469870`.`tr_salario_montante_total_inicial` BEFORE INSERT ON `Agencia` FOR EACH ROW
 BEGIN
 	IF NEW.salario_montante_total > 0 THEN
 		SET NEW.salario_montante_total = 0.00;

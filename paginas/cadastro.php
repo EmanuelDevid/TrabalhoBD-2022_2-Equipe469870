@@ -18,37 +18,38 @@
 
 <body>
     <div class="container">
+        <a class="back-page-btn" href="./login.php"><i class="fa-brands fa-facebook"></i>Voltar</a>
         <h1 class="title">Cadastre-se</h1>
         <form class="form" action="">
             
             <h3 class="subtitle">Informações para cadastro</h3>
             <div class="content-separator">
-                <input type="email" name="email" placeholder="Email">
-                <input type="password" name="password" placeholder="Senha">
-                <input type="text" name="nome" placeholder="Nome completo">
-                <input type="date" name="data_nascimento">
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Senha" required>
+                <input type="text" name="nome" placeholder="Nome completo" required>
+                <input type="date" name="data_nascimento" required>
             </div>
             
             <h3 class="subtitle">Documentos</h3>
             <div class="content-separator">
-                <input type="text" name="cpf" maxlength="11" placeholder="CPF">
-                <input type="text" name="rg" maxlength="15" placeholder="RG">
-                <input type="text" name="uf" maxlength="2" placeholder="UF">
-                <input type="text" name="orgao_emissor" maxlength="4" placeholder="Orgão emissor">
+                <input type="text" name="cpf" maxlength="11" placeholder="CPF" required>
+                <input type="text" name="rg" maxlength="15" placeholder="RG" required>
+                <input type="text" name="uf" maxlength="2" placeholder="UF" required>
+                <input type="text" name="orgao_emissor" maxlength="4" placeholder="Orgão emissor" required>
             </div>
 
             <h3 class="subtitle">Endereço</h3>
             <div class="content-separator endereco">
-                <input type="text" name="logradouro" placeholder="Logradouro">
-                <input type="text" name="nome_logradouro" placeholder="Nome do logradouro">
-                <input type="number" name="num_casa" placeholder="Número">
-                <input type="text" name="bairro" placeholder="Bairro">
-                <input type="number" name="cep" placeholder="CEP">
-                <input type="text" name="cidade" placeholder="Cidade">
-                <input type="text" name="estado" placeholder="Estado">
+                <input type="text" name="logradouro" placeholder="Logradouro" required>
+                <input type="text" name="nome_logradouro" placeholder="Nome do logradouro" required>
+                <input type="number" name="num_casa" placeholder="Número" required>
+                <input type="text" name="bairro" placeholder="Bairro" required>
+                <input type="number" name="cep" placeholder="CEP" required>
+                <input type="text" name="cidade" placeholder="Cidade" required>
+                <input type="text" name="estado" placeholder="Estado" required>
             </div>
 
-            <button class="submit-btn">Confirmar cadastro</button>
+            <button type="submit" class="submit-btn">Confirmar cadastro</button>
         </form>
 
     </div>

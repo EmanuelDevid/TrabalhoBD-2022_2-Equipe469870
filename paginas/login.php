@@ -33,7 +33,7 @@
 
         <section class="banner">
             <picture>
-                <img src="/imagens/banner-img.svg" alt="ilustração com um simbolo bancário">
+                <img src="../imagens/banner-img.svg" alt="ilustração com um simbolo bancário">
             </picture>
         </section>
     </div>

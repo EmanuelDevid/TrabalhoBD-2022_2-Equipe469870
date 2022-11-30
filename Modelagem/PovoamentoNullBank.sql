@@ -8,31 +8,13 @@ INSERT INTO Agencia(nome, salario_montante_total, cidade) VALUES
 SELECT * FROM Agencia;
 
 -- POVOANDO CLIENTES
-INSERT INTO Clientes(cpf, nome_completo, rg, data_nasc, UF, orgao_emissor, logradouro, nome_logradouro, num_casa, bairro, cep, cidade, estado) VALUES
-('06965136332', 'Emanuel Dêvid Paulino Felix', '20160939584', '2000-07-27', 'CE', 'SSPDS', 'Rua', 'São Miguel', '5', 'São Luiz', '62550000', 'Morrinhos', 'Ceará'),
-('07895734355', 'Wendel Manfrini de Souza', '20005687843', '2000-11-28', 'CE', 'SSPDS', 'Avenida', 'John Sanford', '210', 'Terrenos Velhos', '62049000', 'Sobral', 'Ceará'),
-('07448514962', 'Frank William de Souza', '2015596217', '1990-01-14', 'CE', 'SSPDS', 'Rua', 'Coronel Estanislau Frota', '220', 'Centro', '62687222', 'Sobral', 'Ceará'),
-('87248965231', 'Francisco José dos Santos', '20177685423', '1980-09-27', 'CE', 'SSPDS', 'Rua', 'Coronel Pinto Peixoto', '8', 'Centro', '65789654', 'Fortaleza', 'Ceará'),
-('78934238785', 'Maria Alice Albuquerque', '20054698700', '2001-12-01', 'CE', 'SSPDS', 'Casa', 'Recanto das Flores', '515', 'Santo Afonso', '64870170', 'Marco', 'Ceará');
+INSERT INTO Clientes(cpf, nome_completo, rg, data_nasc, UF, orgao_emissor, logradouro, nome_logradouro, num_casa, bairro, cep, cidade, estado, senha_login) VALUES
+('06965136332', 'Emanuel Dêvid Paulino Felix', '20160939584', '2000-07-27', 'CE', 'SSPDS', 'Rua', 'São Miguel', '5', 'São Luiz', '62550000', 'Morrinhos', 'Ceará', '123'),
+('07895734355', 'Wendel Manfrini de Souza', '20005687843', '2000-11-28', 'CE', 'SSPDS', 'Avenida', 'John Sanford', '210', 'Terrenos Velhos', '62049000', 'Sobral', 'Ceará', '123'),
+('07448514962', 'Frank William de Souza', '2015596217', '1990-01-14', 'CE', 'SSPDS', 'Rua', 'Coronel Estanislau Frota', '220', 'Centro', '62687222', 'Sobral', 'Ceará', '456'),
+('87248965231', 'Francisco José dos Santos', '20177685423', '1980-09-27', 'CE', 'SSPDS', 'Rua', 'Coronel Pinto Peixoto', '8', 'Centro', '65789654', 'Fortaleza', 'Ceará', '986'),
+('78934238785', 'Maria Alice Albuquerque', '20054698700', '2001-12-01', 'CE', 'SSPDS', 'Casa', 'Recanto das Flores', '515', 'Santo Afonso', '64870170', 'Marco', 'Ceará', '549');
 SELECT * FROM Clientes;
-
--- POVOANDO CONTAS
-INSERT INTO Contas(agencia_id, saldo, senha, tipo_conta, conta_conjunta, gerente_matricula) value
-('1', '0.00', '1234', 'poupanca', 0, '1'),
-('2', '0.00', '4321', 'corrente', 0, '2'),
-('3', '0.00', '9876', 'especial', 1, '3'),
-('4', '0.00', '6789', 'corrente', 0, '4'),
-('5', '0.00', '1674', 'poupanca', 1, '1');
-SELECT * FROM Contas;
-
--- POVOANDO POSSUI
-INSERT INTO Possui(Clientes_cpf, Contas_num_conta, Contas_agencia_id) value
-('06965136332', '1', '1'),
-('07448514962', '2', '2'),
-('07895734355', '3', '3'),
-('78934238785', '4', '4'),
-('87248965231', '5', '5');
-SELECT * FROM Possui;
 
 -- POVOANDO FUNCIONARIOS
 INSERT INTO Funcionarios(nome_completo, senha, endereco, cidade, sexo, data_nasc, salario, cargo, agencia_id) VALUES
@@ -43,14 +25,32 @@ INSERT INTO Funcionarios(nome_completo, senha, endereco, cidade, sexo, data_nasc
 ('Emanuel Devid','8568347','Morrinho de Arruda 989','Fortaleza','M','1950-12-07','1869.27','atendente','2');
 SELECT * FROM Funcionarios;
 
+-- POVOANDO CONTAS
+INSERT INTO Contas(agencia_id, saldo, senha, tipo_conta, conta_conjunta, gerente_matricula) VALUES
+('1', '0.00', '1234', 'poupanca', 'N', '1'),
+('2', '0.00', '4321', 'corrente', 'N', '2'),
+('3', '0.00', '9876', 'especial', 'N', '3'),
+('4', '0.00', '6789', 'corrente', 'N', '4'),
+('5', '0.00', '1674', 'poupanca', 'N', '1');
+SELECT * FROM Contas;
+
+-- POVOANDO POSSUI
+INSERT INTO Possui(Clientes_cpf, Contas_num_conta, Contas_agencia_id) VALUES
+('06965136332', '1', '1'),
+('07448514962', '2', '2'),
+('07895734355', '3', '3'),
+('78934238785', '4', '4'),
+('87248965231', '5', '5');
+SELECT * FROM Possui;
+
 -- POVOANDO CONTA CORRENTE
-INSERT INTO Corrente(data_aniver_contrato, Contas_num_conta) value
+INSERT INTO Corrente(data_aniver_contrato, Contas_num_conta) VALUES
 ('2020-07-15', '2'),
 ('2018-01-20', '4');
 SELECT * FROM Corrente;
 
 -- POVOANDO CONTA ESPECIAL
-INSERT INTO Especial(limite_credito, Contas_num_conta) value
+INSERT INTO Especial(limite_credito, Contas_num_conta) VALUES
 ('2000.00', '3');
 SELECT * FROM Especial;
 
@@ -89,14 +89,14 @@ SELECT * FROM Telefones;
 
 -- POVOANDO TRANSACAO
 INSERT INTO Transacao(tipo_transacao, data_hora, valor, Contas_num_conta) values
-('depósito', curdate(), '5000.00', '5'),
-('transferência', curdate(), '1500.00', '5'),
-('saque', curdate(), '1000.00', '5'),
+('depósito', curdate(), '5000.00', '1'),
+('transferência', curdate(), '1500.00', '1'),
+('saque', curdate(), '1000.00', '1'),
 ('depósito', curdate(), '10000.00', '2'),
 ('estorno', curdate(), '1000.00', '2'),
 ('transferência', curdate(), '2000.00', '2'),
 ('pagamento', curdate(), '1000.00', '2'),
-('depósito', curdate(), '7000.00', '1'),
-('depósito', curdate(), '1000.00', '1'),
-('saque', curdate(), '3500.00', '1');
+('depósito', curdate(), '7000.00', '3'),
+('depósito', curdate(), '1000.00', '3'),
+('saque', curdate(), '3500.00', '3');
 SELECT * FROM Transacao;

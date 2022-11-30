@@ -18,8 +18,8 @@
     <div class="container">
         <section class="content">
             <h1 class="title">Login</h1>
-            <form class="form" action="">
-                <input type="email" name="email" placeholder="Email">
+            <form class="form" method="POST" action="..\php\valida_login.php">
+                <input type="text" name="login" placeholder="Email">
                 <input type="password" name="password" placeholder="Senha">
 
                 <button type="submit" class="submit-btn">Entrar</button>
@@ -39,3 +39,9 @@
     </div>
 </body>
 </html>
+
+<?php
+    if(isset($_GET['login']) && $_GET['login'] === 'erro'){
+        
+    }
+?>

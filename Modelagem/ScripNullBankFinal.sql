@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `Equipe469870`.`Funcionarios` (
   `sexo` ENUM('M', 'F') NOT NULL,
   `data_nasc` DATE NOT NULL,
   `salario` DECIMAL(18,2) NOT NULL,
-  `cargo` ENUM('gerente', 'atendente', 'caixa') NOT NULL,
+  `cargo` ENUM('gerente', 'atendente', 'caixa', 'dba') NOT NULL, -- incluindo o dba como um cargo de funcionários
   `agencia_id` INT NOT NULL,
   PRIMARY KEY (`matricula`),
   INDEX `fk_funcionarios_agência1_idx` (`agencia_id` ASC) VISIBLE,
@@ -89,6 +89,7 @@ CREATE TABLE IF NOT EXISTS `Equipe469870`.`Clientes` (
   `cep` VARCHAR(45) NOT NULL,
   `cidade` VARCHAR(45) NOT NULL,
   `estado` VARCHAR(45) NOT NULL,
+  `senha_login` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`cpf`))
 ENGINE = InnoDB;
 
@@ -134,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `Equipe469870`.`Contas` (
   `saldo` DECIMAL(18,2) NOT NULL,
   `senha` VARCHAR(45) NOT NULL,
   `tipo_conta` ENUM('corrente', 'especial', 'poupanca') NOT NULL,
-  `conta_conjunta` TINYINT NOT NULL,
+  `conta_conjunta` ENUM('S','N') NOT NULL,
   `gerente_matricula` INT NOT NULL,
   PRIMARY KEY (`num_conta`),
   INDEX `fk_Contas_agência1_idx` (`agencia_id` ASC) VISIBLE,
@@ -367,6 +368,82 @@ BEGIN
     END IF;
 END$$
 DELIMITER ;
+
+
+-- Criação do trigger responsável por preencher a tabela Corrente
+DROP TRIGGER IF EXISTS `Equipe469870`.`tr_corrente`;
+
+DELIMITER $$
+USE `Equipe469870`$$ 
+CREATE DEFINER = CURRENT_USER TRIGGER `Equipe469870`.`tr_corrente` BEFORE INSERT ON `Contas` FOR EACH ROW
+BEGIN
+	IF (NEW.tipo_conta = 'corrente') THEN
+      INSERT INTO corrente(data_aniver_contrato,Contas_num_conta) VALUES
+      (curdate(), NEW.num_conta);
+   END IF; 
+END$$
+DELIMITER ;
+
+
+-- Criação do trigger responsável por limitar o número de dependentes por funcionário
+DROP TRIGGER IF EXISTS `Equipe469870`.`tr_numero_dependentes`;
+
+DELIMITER $$
+USE `Equipe469870`$$ 
+CREATE DEFINER = CURRENT_USER TRIGGER `Equipe469870`.`tr_numero_dependentes` BEFORE INSERT ON `Dependentes` FOR EACH ROW
+BEGIN
+	IF (SELECT COUNT(nome_completo) FROM  dependentes WHERE funcionarios_matricula= NEW.funcionarios_matricula) >= 5 THEN
+      SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Already five rows dependentes';
+   END IF;
+END$$
+DELIMITER ;
+
+
+-- Criação do trigger responsável por criptografia da senha de Contas
+DROP TRIGGER IF EXISTS `Equipe469870`.`senha_criptografa`;
+
+DELIMITER $$
+USE `Equipe469870`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `equipe469870`.`senha_criptografa` BEFORE INSERT ON `Contas` FOR EACH ROW
+BEGIN
+SET NEW.senha = MD5(NEW.senha);
+END$$
+DELIMITER ;
+
+
+-- Criação do trigger responsável por criptografia da senha de Funcionarios
+DROP TRIGGER IF EXISTS `Equipe469870`.`senha_criptografa_func`;
+
+DELIMITER $$
+USE `Equipe469870`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `equipe469870`.`senha_criptografa_func` BEFORE INSERT ON `Funcionarios` FOR EACH ROW
+BEGIN
+SET NEW.senha = MD5(NEW.senha);
+END$$
+DELIMITER ;
+
+
+-- Criação do trigger responsável por criptografia da senha de Clientes
+DROP TRIGGER IF EXISTS `Equipe469870`.`senha_criptografa_cliente`;
+
+DELIMITER $$
+USE `Equipe469870`$$
+CREATE DEFINER = CURRENT_USER TRIGGER `equipe469870`.`senha_criptografa_cliente` BEFORE INSERT ON `Clientes` FOR EACH ROW
+BEGIN
+SET NEW.senha_login = MD5(NEW.senha_login);
+END$$
+DELIMITER ;
+
+/*DELIMITER $$
+USE Equipe469870$$ 
+CREATE DEFINER = CURRENT_USER TRIGGER Equipe469870.tr_conjunta BEFORE INSERT ON Contas FOR EACH ROW
+BEGIN
+    IF (NEW.conta_conjunta= 1) THEN
+      INSERT INTO Possui(Clientes_cpf,Contas_num_conta,Contas_agencia_id) value
+      (CPF, NEW.num_conta, NEW.agencia_id);
+   END IF; 
+END$$
+DELIMITER ;*/
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

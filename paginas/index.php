@@ -18,8 +18,8 @@
     <div class="container">
         <section class="content">
             <h1 class="title">Login</h1>
-            <form class="form" action="">
-                <input type="email" name="email" placeholder="Usuário, Email ou CPF" required>
+            <form class="form" method="POST" action="../php/valida_login.php">
+                <input type="text" name="login" placeholder="Usuário, Email ou CPF" required>
                 <input type="password" name="password" placeholder="Senha" required>
 
                 <button type="submit" class="submit-btn">Entrar</button>

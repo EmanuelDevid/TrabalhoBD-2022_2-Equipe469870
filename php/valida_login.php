@@ -8,7 +8,7 @@
     $usuario_autenticado = false;
     
     $login = strval($_POST["login"]); //pegando login do usuário
-    $senha = strval(($_POST["password"])); //pegando senha do usuário e criptografando
+    $senha = md5(($_POST["password"])); //pegando senha do usuário e criptografando
 
     //consulta que verifica se tem um (no máximo, já que a matrícula é única) funcionário com a matrícula e a senha passadas na tela de login
     $stmt = $conexao->prepare("SELECT COUNT(*) AS num FROM Funcionarios WHERE matricula = '$login' AND senha = '$senha'");

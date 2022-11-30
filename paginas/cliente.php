@@ -15,7 +15,7 @@
 
 </head>
 <body>
-    <a class="back-page-btn" href="./index.php">Sair</a>
+    <a class="back-page-btn" href="index.php">Sair</a>
     <header class="header">
         <h1 class="logo">Nullbank</h1>
     </header>

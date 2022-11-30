@@ -19,14 +19,13 @@
         <section class="content">
             <h1 class="title">Login</h1>
             <form class="form" action="">
-                <input type="email" name="email" placeholder="Email">
-                <input type="password" name="password" placeholder="Senha">
+                <input type="email" name="email" placeholder="Usuário, Email ou CPF" required>
+                <input type="password" name="password" placeholder="Senha" required>
 
                 <button type="submit" class="submit-btn">Entrar</button>
 
                 <div class="form-links">
-                    <a class="link" href="">Esqueceu sua senha ?</a>
-                    <a class="link" href="">Cadastre-se</a>
+                    <a class="link" href="./cadastro.php">Cadastre-se</a>
                 </div>
             </form>
         </section>

@@ -8,6 +8,23 @@
     width: 100%;
 }
 
+.back-page-btn {
+    text-decoration: none;
+    color:#F2ECE9;
+    font-size: 20px;
+    font-weight: 700;
+
+    position: fixed;
+    left: 0;
+    padding: 20px;
+
+    transition: color .4s;
+}
+
+.back-page-btn:hover {
+    color: #393E59;
+}
+
 .title {
     color: #F2ECE9;
     font-size: 3.4rem;

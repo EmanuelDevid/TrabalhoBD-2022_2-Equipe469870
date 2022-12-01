@@ -18,9 +18,9 @@
 
 <body>
     <div class="container">
-        <a class="back-page-btn" href="./login.php"><i class="fa-brands fa-facebook"></i>Voltar</a>
+        <a class="back-page-btn" href="index.php"><i class="fa-brands fa-facebook"></i>Voltar</a>
         <h1 class="title">Cadastre-se</h1>
-        <form class="form" action="">
+        <form class="form" method="POST" action="../php/cadastra_cliente.php">
             
             <h3 class="subtitle">Informações para cadastro</h3>
             <div class="content-separator">
@@ -33,18 +33,18 @@
             <h3 class="subtitle">Documentos</h3>
             <div class="content-separator">
                 <input type="text" name="cpf" maxlength="11" placeholder="CPF" required>
-                <input type="text" name="rg" maxlength="15" placeholder="RG" required>
+                <input type="text" name="rg" maxlength="11" placeholder="RG" required>
                 <input type="text" name="uf" maxlength="2" placeholder="UF" required>
-                <input type="text" name="orgao_emissor" maxlength="4" placeholder="Orgão emissor" required>
+                <input type="text" name="orgao_emissor" placeholder="Orgão emissor" required>
             </div>
 
             <h3 class="subtitle">Endereço</h3>
             <div class="content-separator endereco">
                 <input type="text" name="logradouro" placeholder="Logradouro" required>
                 <input type="text" name="nome_logradouro" placeholder="Nome do logradouro" required>
-                <input type="number" name="num_casa" placeholder="Número" required>
+                <input type="text" name="num_casa" placeholder="Número" required>
                 <input type="text" name="bairro" placeholder="Bairro" required>
-                <input type="number" name="cep" placeholder="CEP" required>
+                <input type="text" name="cep" placeholder="CEP" required>
                 <input type="text" name="cidade" placeholder="Cidade" required>
                 <input type="text" name="estado" placeholder="Estado" required>
             </div>

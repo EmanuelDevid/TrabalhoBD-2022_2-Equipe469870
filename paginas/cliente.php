@@ -1,5 +1,27 @@
 <?php
     include_once("../php/validador_acesso.php");
+    include_once("../php/conexao.php");
+
+    $cpf = $_SESSION["login_usuário"];
+
+    $stmt = $conexao->prepare("SELECT nome_completo FROM Clientes WHERE cpf = '$cpf'");
+    if($stmt->execute()){
+        $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $nome = $retorno_consulta[0]['nome_completo'];
+    }
+
+    $stmt = $conexao->prepare("SELECT Contas_num_conta FROM Possui WHERE Clientes_cpf = '$cpf'");
+    if($stmt->execute()){
+        $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $num_conta = $retorno_consulta[0]['Contas_num_conta'];
+
+        $stmt = $conexao->prepare("SELECT saldo FROM CONTAS WHERE num_conta = '$num_conta'");
+        if($stmt->execute()){
+            $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $saldo = $retorno_consulta[0]['saldo'];
+        }
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +51,7 @@
                 <img class="icon" src="../imagens/user.png" alt="icone do usuário">
                 <div>
                     <h3 class="card-text">Usuário</h3>
-                    <p class="card-value">Igor Pierre</p>
+                    <p class="card-value"><?php echo $nome ?></p>
                 </div>
             </div>
 
@@ -37,7 +59,7 @@
                 <img class="icon" src="../imagens/real-brasileiro.png" alt="icone do usuário">
                 <div>
                     <h3 class="card-text">Saldo</h3>
-                    <p class="card-value">2000,00</p>
+                    <p class="card-value"><?php echo $saldo ?></p>
                 </div>
             </div>
         </section>

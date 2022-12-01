@@ -36,6 +36,8 @@
                         header('Location: funcionario.php');
                         break;
                 }
+
+                $_SESSION['autenticado'] = 'sim';
             }
         }else{
             $stmt = $conexao->prepare("SELECT COUNT(*) AS num FROM Clientes WHERE cpf = '$login' AND senha_login = '$senha'");
@@ -44,8 +46,10 @@
                 $valor = (int) $retorno_consulta[0]['num'];
                 if($valor > 0){
                     header('Location: ../paginas/cliente.php');
+                    $_SESSION['autenticado'] = 'sim';
                 }else{
                     header('Location: ../paginas/index.php?login=erro');
+                    $_SESSION['autenticado'] = 'nao';
                 }
             }
         }

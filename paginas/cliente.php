@@ -1,3 +1,7 @@
+<?php
+    include_once("../php/validador_acesso.php");
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -15,7 +19,7 @@
 
 </head>
 <body>
-    <a class="back-page-btn" href="index.php">Sair</a>
+    <a class="back-page-btn" href="../php/logoff.php">Sair</a>
     <header class="header">
         <h1 class="logo">Nullbank</h1>
     </header>

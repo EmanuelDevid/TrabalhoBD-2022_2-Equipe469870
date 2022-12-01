@@ -47,6 +47,7 @@
                 if($valor > 0){
                     header('Location: ../paginas/cliente.php');
                     $_SESSION['autenticado'] = 'sim';
+                    $_SESSION['login_usuário'] = $login;
                 }else{
                     header('Location: ../paginas/index.php?login=erro');
                     $_SESSION['autenticado'] = 'nao';

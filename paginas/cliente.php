@@ -39,14 +39,71 @@
         </section>
 
         <section class="section-services">
-            <h2 class="subtitle">Todos os serviços</h2>
+            <h2 class="title">Todos os serviços</h2>
             <div class="services-area">
-                <button class="btn-service">Saque</button>
-                <button class="btn-service">Depósito</button>
-                <button class="btn-service">Transferência</button>
-                <button class="btn-service">Estorno</button>
+                <div class="service-card">
+                    <h3>Saques</h3>
+                    <hr/>
+                </div>
+
+                <div class="service-card">
+                    <h3>Depósitos</h3>
+                    <hr/>
+                </div>
+
+                <div class="service-card">
+                    <h3>Transferências</h3>
+                    <hr/>
+                </div>
+
+                <div class="service-card">
+                    <h3>Estorno</h3>
+                    <hr/>
+                </div>
             </div>
+            <button class="btn-select-trasaction" onclick="Modal.open()">Realizar transação</button>
         </section>
     </main>
+
+    <div class="modal-overlay" onclick="">
+        <div class="modal">
+            <a class="close-modal" onclick="Modal.close()">Cancelar</a>
+            <h2 class="form-title">Nova transação</h2>
+
+            <h3 class="subtitle">Selecione um tipo de transação</h3>
+
+            <select name="select_transacoes" class="select_trancacoes" required>
+                <option value="">--Tipo de transação--</option>
+                <option id="opition_saque" value="opition_saque">Saque</option>
+                <option id="opition_deposito" value="opition_deposito">Depósito</option>
+                <option id="opition_transferencia" value="opition_transferencia">Transferência</option>
+                <option id="opition_estorno" value="opition_estorno">Estorno</option>
+            </select>
+
+            <h3 class="subtitle">Selecione um tipo de transação</h3>
+
+            <form class="modal-form" action="" method="POST">
+                <input type="text" name="valor_saque" placeholder="Valor do saque" required>
+                <button class="btn-submit-trasaction" type="submit">Confirmar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const Modal = {
+            open(){
+                document
+                    .querySelector(".modal-overlay")
+                    .classList
+                    .add("active")
+            },
+            close(){
+                document
+                    .querySelector(".modal-overlay")
+                    .classList
+                    .remove("active")
+            }
+        }
+    </script>
 </body>
 </html>

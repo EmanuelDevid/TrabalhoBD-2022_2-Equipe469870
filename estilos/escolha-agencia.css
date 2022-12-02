@@ -38,14 +38,15 @@
     align-items: center;
     justify-content: space-around;
 
-    width: 70%;
-    padding: 20px 0;
+    width: 90%;
+    padding: 20px 10px;
     margin: 20px 0;
+    border-left: 8px solid #325CD9;
     border-radius: 20px;
 }
 
 
-.btn-seleciona {
+.btn-seleciona-conta {
     background-color: #F2ECE9;
     color: #393E59;
 
@@ -60,7 +61,7 @@
     transition: .6s;
 }
 
-.btn-seleciona:hover,
-.btn-seleciona:focus {
+.btn-seleciona-conta:hover,
+.btn-seleciona-conta:focus {
     box-shadow: inset 450px 0 0 0 #4AD96D;
 }

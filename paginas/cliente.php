@@ -21,7 +21,6 @@
             $saldo = $retorno_consulta[0]['saldo'];
         }
     }
-
 ?>
 
 <!DOCTYPE html>

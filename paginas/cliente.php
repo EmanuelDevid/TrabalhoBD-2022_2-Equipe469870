@@ -10,16 +10,11 @@
         $nome = $retorno_consulta[0]['nome_completo'];
     }
 
-    $stmt = $conexao->prepare("SELECT Contas_num_conta FROM Possui WHERE Clientes_cpf = '$cpf'");
+    $num_conta = $_SESSION['num_conta'];
+    $stmt = $conexao->prepare("SELECT saldo FROM CONTAS WHERE num_conta = '$num_conta'");
     if($stmt->execute()){
         $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $num_conta = $retorno_consulta[0]['Contas_num_conta'];
-
-        $stmt = $conexao->prepare("SELECT saldo FROM CONTAS WHERE num_conta = '$num_conta'");
-        if($stmt->execute()){
-            $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $saldo = $retorno_consulta[0]['saldo'];
-        }
+        $saldo = $retorno_consulta[0]['saldo'];
     }
 ?>
 
@@ -98,11 +93,10 @@
             <form class="modal-form" action="" method="POST">
                 <h3 class="subtitle">Selecione um tipo de transação</h3>
                 <select name="select_transacoes" class="select_trancacoes" required>
-                    <option value="">--Tipo de transação--</option>
-                    <option id="opition_saque" value="opition_saque">Saque</option>
-                    <option id="opition_deposito" value="opition_deposito">Depósito</option>
-                    <option id="opition_transferencia" value="opition_transferencia">Transferência</option>
-                    <option id="opition_estorno" value="opition_estorno">Estorno</option>
+                    <option id="opition_saque" value="saque">Saque</option>
+                    <option id="opition_deposito" value="deposito">Depósito</option>
+                    <option id="opition_transferencia" value="transferencia">Transferência</option>
+                    <option id="opition_estorno" value="estorno">Estorno</option>
                 </select>
 
                 <h3 class="subtitle">Selecione o valor transação</h3>

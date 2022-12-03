@@ -1,8 +1,6 @@
 <?php
-    //include_once("../php/validador_acesso.php");
+    include_once("../php/validador_acesso.php");
     include_once("../php/conexao.php");
-
-    session_start();
 
     $cpf = $_SESSION["login_usuário"];
 ?>
@@ -39,7 +37,7 @@
             $stmt = $conexao->prepare("SELECT Contas_num_conta FROM Possui WHERE Clientes_cpf = '$cpf'");
             if($stmt->execute()){
                 $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+                $i = 1;
                 foreach($retorno_consulta as $row){ 
                     $num_conta = $row['Contas_num_conta'];
                     $stmt = $conexao->prepare("SELECT agencia_id FROM Contas WHERE num_conta = '$num_conta'");
@@ -54,7 +52,7 @@
                             $cidade = $retorno_consulta[0]['cidade'];
                         }
                     } ?>
-               
+      
                 <div class="scroll-area">
                     <div class="card">
                         <div>
@@ -77,6 +75,7 @@
                             <p class="card-value"><?php echo $cidade ?></p>
                         </div>
                     </div>
+
                 </div>
         <?php }} ?>
         

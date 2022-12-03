@@ -42,7 +42,6 @@
         $saldo = $retorno_consulta[0]['saldo'];
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -59,7 +58,7 @@
     <link rel="stylesheet" href="../estilos/cliente.css">
 
 </head>
-<body>
+<body style="height: 100vh;">
     <a class="back-page-btn" href="../php/logoff.php">Sair</a>
     <header class="header">
         <h1 class="logo">Nullbank</h1>
@@ -110,7 +109,7 @@
         </section>
     </main>
 
-    <div class="modal-overlay" onclick="">
+    <div class="modal-overlay">
         <div class="modal">
             <a class="close-modal" onclick="Modal.close()">Cancelar</a>
             <h2 class="form-title">Nova transação</h2>
@@ -125,7 +124,8 @@
                     <option id="opition_pagamento" value="pagamento">Pagamento</option>
                 </select>
 
-                <h3 class="subtitle">Selecione o valor transação</h3>
+                <h3 class="subtitle">Informe o valor da transação</h3>
+                <small class="help">Valor em reais, ex: 200,00</small>
                 <input type="text" name="valor_transacao" placeholder="Valor da transação" required>
                 <button class="btn-submit-trasaction" type="submit">Confirmar</button>
             </form>

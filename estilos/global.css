@@ -7,15 +7,18 @@ html, body {
     font-family: 'Poppins', sans-serif;
 }
 
-body::-webkit-scrollbar {
+body::-webkit-scrollbar,
+body::-moz-scrollbar {
     width: 12px;
 }
   
-body::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track,
+body::-moz-scrollbar-track {
     background: #0597F2;
 }
   
-body::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb,
+body::-moz-scrollbar-thumb {
     background-color: #021F59;
     border-radius: 20px;
     border: 3px solid #0597F2;

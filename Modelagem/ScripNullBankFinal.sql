@@ -434,16 +434,6 @@ SET NEW.senha_login = MD5(NEW.senha_login);
 END$$
 DELIMITER ;
 
-/*DELIMITER $$
-USE Equipe469870$$ 
-CREATE DEFINER = CURRENT_USER TRIGGER Equipe469870.tr_conjunta BEFORE INSERT ON Contas FOR EACH ROW
-BEGIN
-    IF (NEW.conta_conjunta= 1) THEN
-      INSERT INTO Possui(Clientes_cpf,Contas_num_conta,Contas_agencia_id) value
-      (CPF, NEW.num_conta, NEW.agencia_id);
-   END IF; 
-END$$
-DELIMITER ;*/
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

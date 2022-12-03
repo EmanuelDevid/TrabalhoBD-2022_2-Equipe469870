@@ -24,7 +24,7 @@
 </head>
 
 <body>
-    <a class="link-nova-conta" href="">Criar nova conta</a>
+    <a class="link-nova-conta" href="nova-conta.php">Criar nova conta</a>
 
     <header class="header">
         <h1 class="logo">Nullbank</h1>
@@ -38,7 +38,6 @@
                 $stmt = $conexao->prepare("SELECT Contas_num_conta FROM Possui WHERE Clientes_cpf = '$cpf'");
                 if($stmt->execute()){
                     $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    $i = 1;
                     foreach($retorno_consulta as $row){ 
                         $num_conta = $row['Contas_num_conta'];
                         $stmt = $conexao->prepare("SELECT agencia_id FROM Contas WHERE num_conta = '$num_conta'");
@@ -52,7 +51,7 @@
                                 $nome_agencia = $retorno_consulta[0]['nome'];
                                 $cidade = $retorno_consulta[0]['cidade'];
                             }
-                        } ?>
+                        } ?>    
         
                         <div class="card">
                             <div>

@@ -1,3 +1,11 @@
+<?php
+    include_once('../php/validador_acesso.php');
+    include_once('../php/conexao.php');
+
+    //pegando cpf do cliente que está logado
+    $cpf = $_SESSION["login_usuário"];
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -18,50 +26,64 @@
 
 <body>
     <div class="container">
-        <a class="back-page-btn" href="index.php">Voltar</a>
+        <a class="back-page-btn" href="escolha-conta.php">Voltar</a>
         <h1 class="title">Nova conta</h1>
-        <form class="form" method="POST" action="">
+        
 
             <h3 class="subtitle">Agências disponíveis</h3>
             <div class="scroll-area">
-                <div class="card">
-                    <div>
-                        <h3 class="card-text">Numero da agência</h3>
-                        <p class="card-value"><?php echo $agencia_id?></p>
-                    </div>
+                <?php
+                    $stmt = $conexao->prepare("SELECT id, nome, cidade FROM Agencia");
+                    if($stmt->execute()){
+                        $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        foreach($retorno_consulta as $tupla){
+                            $agencia_id = $tupla['id'];
+                            $nome_agencia = $tupla['nome'];
+                            $cidade = $tupla['cidade']; ?>
 
-                    <div>
-                        <h3 class="card-text">Agência</h3>
-                        <p class="card-value"><?php echo $nome_agencia ?></p>
-                    </div>
+                            <div class="card">
+                                <div>
+                                    <h3 class="card-text">Numero da agência</h3>
+                                    <p class="card-value"><?php echo $agencia_id ?></p>
+                                </div>
 
-                    <div>
-                        <h3 class="card-text">Local da agência</h3>
-                        <p class="card-value"><?php echo $cidade ?></p>
-                    </div>
-                </div>
+                                <div>
+                                    <h3 class="card-text">Agência</h3>
+                                    <p class="card-value"><?php echo $nome_agencia ?></p>
+                                </div>
+
+                                <div>
+                                    <h3 class="card-text">Local da agência</h3>
+                                    <p class="card-value"><?php echo $cidade ?></p>
+                                </div>
+                            </div>
+                <?php   }
+                    } ?>
             </div>
             
             <h3 class="subtitle">Informações para cadastro</h3>
-            <label for="agencia_id">Numero da agencia</label>
-            <input type="text" name="agencia_id" required>
+            <form class="form" method="POST" action="../php/cria-conta.php">
+                <label for="agencia_id">Numero da agencia</label>
+                <input type="text" name="agencia_id" required>
 
-            <label for="tipo_conta">Tipo de conta</label>
-            <select name="tipo_conta">
-                <option value="poupanca">Poupança</option>
-                <option value="corente">Corrente</option>
-                <option value="especial">Especial</option>
-            </select>
+                <label for="tipo_conta">Tipo de conta</label>
+                <select name="tipo_conta">
+                    <option value="poupanca">Poupança</option>
+                    <option value="corente">Corrente</option>
+                    <option value="especial">Especial</option>
+                </select>
 
-            <label for="conta_conjunta">Será uma conta conjunta ?</label>
-            <select name="conta_conjunta">
-                <option value="N">Não</option>
-                <option value="S">Sim</option>
-            </select>
-            
-            <button type="submit" class="submit-btn">Confirmar cadastro</button>
-        </form>
+                <label for="conta_conjunta">Será uma conta conjunta?</label>
+                <select name="conta_conjunta">
+                    <option value="N">Não</option>
+                    <option value="S">Sim</option>
+                </select>
 
+                <label for="senha">Digite uma senha para sua conta:</label>
+                <input type="password" name="senha" id="senha">
+                
+                <button type="submit" class="submit-btn">Confirmar cadastro</button>
+            </form>
     </div>
 </body>
 

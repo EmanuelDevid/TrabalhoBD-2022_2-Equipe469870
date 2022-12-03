@@ -106,3 +106,6 @@ INSERT INTO Transacao(tipo_transacao, data_hora, valor, Contas_num_conta) VALUES
 ('depósito', curdate(), '1000.00', '1'),
 ('saque', curdate(), '3500.00', '1');
 SELECT * FROM Transacao;
+
+INSERT INTO Transacao(tipo_transacao, data_hora, valor, Contas_num_conta) VALUES
+('depósito', curdate(), '5560.50', '16');

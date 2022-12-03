@@ -33,59 +33,57 @@
     <main class="main">
         <h2 class="title">Contas cadastradas</h2>
 
-        <?php 
-            $stmt = $conexao->prepare("SELECT Contas_num_conta FROM Possui WHERE Clientes_cpf = '$cpf'");
-            if($stmt->execute()){
-                $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                $i = 1;
-                foreach($retorno_consulta as $row){ 
-                    $num_conta = $row['Contas_num_conta'];
-                    $stmt = $conexao->prepare("SELECT agencia_id FROM Contas WHERE num_conta = '$num_conta'");
-                    if($stmt->execute()){
-                        $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                        $agencia_id = $retorno_consulta[0]['agencia_id'];
-
-                        $stmt = $conexao->prepare("SELECT nome, cidade FROM Agencia WHERE id = '$agencia_id'");
+        <div class="scroll-area">
+            <?php 
+                $stmt = $conexao->prepare("SELECT Contas_num_conta FROM Possui WHERE Clientes_cpf = '$cpf'");
+                if($stmt->execute()){
+                    $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $i = 1;
+                    foreach($retorno_consulta as $row){ 
+                        $num_conta = $row['Contas_num_conta'];
+                        $stmt = $conexao->prepare("SELECT agencia_id FROM Contas WHERE num_conta = '$num_conta'");
                         if($stmt->execute()){
                             $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                            $nome_agencia = $retorno_consulta[0]['nome'];
-                            $cidade = $retorno_consulta[0]['cidade'];
-                        }
-                    } ?>
-      
-                <div class="scroll-area">
-                    <div class="card">
-                        <div>
-                            <h3 class="card-text">Numero da conta</h3>
-                            <p class="card-value"><?php echo $num_conta ?></p>
-                        </div>
-    
-                        <div>
-                            <h3 class="card-text">Numero da agência</h3>
-                            <p class="card-value"><?php echo $agencia_id?></p>
-                        </div>
-    
-                        <div>
-                            <h3 class="card-text">Agência</h3>
-                            <p class="card-value"><?php echo $nome_agencia ?></p>
-                        </div>
-    
-                        <div>
-                            <h3 class="card-text">Local da agência</h3>
-                            <p class="card-value"><?php echo $cidade ?></p>
-                        </div>
-                    </div>
+                            $agencia_id = $retorno_consulta[0]['agencia_id'];
 
-                </div>
-        <?php }} ?>
+                            $stmt = $conexao->prepare("SELECT nome, cidade FROM Agencia WHERE id = '$agencia_id'");
+                            if($stmt->execute()){
+                                $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                $nome_agencia = $retorno_consulta[0]['nome'];
+                                $cidade = $retorno_consulta[0]['cidade'];
+                            }
+                        } ?>
+        
+                        <div class="card">
+                            <div>
+                                <h3 class="card-text">Numero da conta</h3>
+                                <p class="card-value"><?php echo $num_conta ?></p>
+                            </div>
+            
+                            <div>
+                                <h3 class="card-text">Numero da agência</h3>
+                                <p class="card-value"><?php echo $agencia_id?></p>
+                            </div>
+            
+                            <div>
+                                <h3 class="card-text">Agência</h3>
+                                <p class="card-value"><?php echo $nome_agencia ?></p>
+                            </div>
+            
+                            <div>
+                                <h3 class="card-text">Local da agência</h3>
+                                <p class="card-value"><?php echo $cidade ?></p>
+                            </div>
+                        </div>
+            <?php }} ?>
+        </div>
         
         <h2 class="title">Informe os dados da conta que deseja acessar</h2>
-        <form class="form-conta" action="" method="POST">
-            
-            <input type="text" name="senha" placeholder="Numero da conta">
-            <input type="text" name="senha" placeholder="Senha">
+        <form class="form-conta" action="cliente.php" method="POST">
+            <input type="text" name="num_conta" placeholder="Numero da conta">
+            <input type="password" name="senha" placeholder="Senha">
             <button class="submit-btn" type="submit">Entrar</button>
-        </form>
+        </form>   
     </main>
 </body>
 </html>

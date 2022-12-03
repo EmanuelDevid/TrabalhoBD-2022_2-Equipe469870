@@ -27,7 +27,7 @@
     color: #393E59;
     font-size: 1.6rem;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .scroll-area {
@@ -36,7 +36,7 @@
     align-items: flex-start;
 
     width: 80%;
-    height: 273px;
+    height: 340px;
     padding: 5px 0;
     margin-bottom: 20px;
     overflow-y: auto;

@@ -10,7 +10,27 @@
         $nome = $retorno_consulta[0]['nome_completo'];
     }
 
-    $num_conta = $_SESSION['num_conta'];
+    $num_conta = $_POST['num_conta'];
+    $senha_informada = md5($_POST['senha']);
+
+    $stmt = $conexao->prepare("SELECT Clientes_cpf FROM Possui WHERE Contas_num_conta = '$num_conta'");
+    if($stmt->execute()){
+        $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $cpf_informado = $retorno_consulta[0]['Clientes_cpf'];
+        if($cpf !== $cpf_informado){
+            header('Location: escolha-conta.php?conta=erro');
+        }
+    }
+
+    $stmt = $conexao->prepare("SELECT senha FROM Contas WHERE num_conta = '$num_conta'");
+    if($stmt->execute()){
+        $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $senha = $retorno_consulta[0]['senha'];
+        if($senha !== $senha_informada){
+            header('Location: escolha-conta.php?senha=erro');
+        }
+    }
+
     $stmt = $conexao->prepare("SELECT saldo FROM CONTAS WHERE num_conta = '$num_conta'");
     if($stmt->execute()){
         $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);

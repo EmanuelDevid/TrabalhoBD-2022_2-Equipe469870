@@ -18,7 +18,7 @@
 
 <body>
     <div class="container">
-        <a class="back-page-btn" href="index.php"><i class="fa-brands fa-facebook"></i>Voltar</a>
+        <a class="back-page-btn" href="index.php">Voltar</a>
         <h1 class="title">Cadastre-se</h1>
         <form class="form" method="POST" action="../php/cadastra_cliente.php">
             

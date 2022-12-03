@@ -45,7 +45,7 @@
                 $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 $valor = (int) $retorno_consulta[0]['num'];
                 if($valor > 0){
-                    header('Location: ../paginas/cliente.php');
+                    header('Location: ../paginas/escolha-conta.php');
                     $_SESSION['autenticado'] = 'sim';
                     $_SESSION['login_usuário'] = $login;
                 }else{

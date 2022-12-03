@@ -34,6 +34,10 @@ INSERT INTO Contas(agencia_id, saldo, senha, tipo_conta, conta_conjunta, gerente
 ('5', '0.00', '1674', 'poupanca', 'S', '1');
 SELECT * FROM Contas;
 
+
+INSERT INTO Contas(agencia_id, saldo, senha, tipo_conta, conta_conjunta, gerente_matricula) VALUES
+('1', '0.00', '1234', 'corrente', 'N', '1');
+
 -- POVOANDO POSSUI
 INSERT INTO Possui(Clientes_cpf, Contas_num_conta, Contas_agencia_id) VALUES
 ('06965136332', '1', '1'),
@@ -42,6 +46,10 @@ INSERT INTO Possui(Clientes_cpf, Contas_num_conta, Contas_agencia_id) VALUES
 ('78934238785', '4', '4'),
 ('87248965231', '5', '5');
 SELECT * FROM Possui;
+
+INSERT INTO Possui(Clientes_cpf, Contas_num_conta, Contas_agencia_id) VALUES
+('06965136332', '12', '1'),
+('06965136332', '13', '1');
 
 -- LER CONTA CORRENTE. NÃO É POSSÍVEL POVOÁ-LA, POIS EXSITE UM TRIGGER RESPONSÁVEL POR ISSO ASSIM QUE UMA CONTA DO TIPO CORRENTE É CRIADA
 SELECT * FROM Corrente;

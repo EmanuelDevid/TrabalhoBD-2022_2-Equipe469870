@@ -95,19 +95,17 @@
             <a class="close-modal" onclick="Modal.close()">Cancelar</a>
             <h2 class="form-title">Nova transação</h2>
 
-            <h3 class="subtitle">Selecione um tipo de transação</h3>
-
-            <select name="select_transacoes" class="select_trancacoes" required>
-                <option value="">--Tipo de transação--</option>
-                <option id="opition_saque" value="opition_saque">Saque</option>
-                <option id="opition_deposito" value="opition_deposito">Depósito</option>
-                <option id="opition_transferencia" value="opition_transferencia">Transferência</option>
-                <option id="opition_estorno" value="opition_estorno">Estorno</option>
-            </select>
-
-            <h3 class="subtitle">Selecione um tipo de transação</h3>
-
             <form class="modal-form" action="" method="POST">
+                <h3 class="subtitle">Selecione um tipo de transação</h3>
+                <select name="select_transacoes" class="select_trancacoes" required>
+                    <option value="">--Tipo de transação--</option>
+                    <option id="opition_saque" value="opition_saque">Saque</option>
+                    <option id="opition_deposito" value="opition_deposito">Depósito</option>
+                    <option id="opition_transferencia" value="opition_transferencia">Transferência</option>
+                    <option id="opition_estorno" value="opition_estorno">Estorno</option>
+                </select>
+
+                <h3 class="subtitle">Selecione o valor transação</h3>
                 <input type="text" name="valor_saque" placeholder="Valor do saque" required>
                 <button class="btn-submit-trasaction" type="submit">Confirmar</button>
             </form>

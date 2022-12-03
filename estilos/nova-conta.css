@@ -6,6 +6,7 @@
     align-items: center;
 
     width: 100%;
+    min-height: 100vh;
 }
 
 .back-page-btn {
@@ -52,7 +53,7 @@
     color: #F2ECE9;
     font-weight: 700;
     font-size: 20px;
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .form input, .form select {
@@ -77,7 +78,7 @@
     border: 2px solid #F2ECE9;
     border-radius: 15px;
     padding: 10px 20px;
-    margin: 30px;
+    margin: 20px;
 
     cursor: pointer;
     transition: .6s;
@@ -113,4 +114,95 @@
     margin: 10px 0;
     border-left: 8px solid #325CD9;
     border-radius: 20px;
+}
+
+.form-title {
+    color: #F2ECE9;
+    font-size: 2rem;
+    font-weight: 700;
+
+    margin-bottom: 10px;
+}
+
+.modal-overlay {
+    background-color: rgba(0, 0, 0, 0.8);
+
+    display: none;
+
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+
+    opacity: 0;
+    visibility: hidden;
+}
+
+.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background-color: #05AFF2;
+    color: #393E59;
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 50%;
+    padding-top: 20px;
+    position: relative;
+    border-radius: 30px;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+.modal-form input, 
+.modal-form select {
+    background-color: #F2ECE9;
+    color: #393E59;
+    font-size: 20px;
+
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.modal-form label {
+    color: #393E59;
+    font-size: 20px;
+    font-weight: 700;
+ 
+}
+
+.close-modal {
+    color: #F2ECE9;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 20px;
+}
+
+.close-modal:hover {
+    color: #FF4C40;
 }

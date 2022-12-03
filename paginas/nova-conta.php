@@ -60,31 +60,58 @@
                 <?php   }
                     } ?>
             </div>
+
+            <button class="submit-btn" onclick="Modal.open()">Criar conta</button>
             
-            <h3 class="subtitle">Informações para cadastro</h3>
-            <form class="form" method="POST" action="../php/cria-conta.php">
+    </div>
+
+    <div class="modal-overlay">
+        <div class="modal">
+            <a class="close-modal" onclick="Modal.close()">Cancelar</a>
+
+            <h2 class="form-title">Informações</h2>
+            <form class="modal-form" method="POST" action="../php/cria-conta.php">
+                
                 <label for="agencia_id">Numero da agencia</label>
                 <input type="text" name="agencia_id" required>
 
+                <label for="senha">Senha</label>
+                <input type="password" name="senha" id="senha">
+                   
                 <label for="tipo_conta">Tipo de conta</label>
                 <select name="tipo_conta">
                     <option value="poupanca">Poupança</option>
                     <option value="corente">Corrente</option>
                     <option value="especial">Especial</option>
                 </select>
-
+                      
                 <label for="conta_conjunta">Será uma conta conjunta?</label>
                 <select name="conta_conjunta">
                     <option value="N">Não</option>
                     <option value="S">Sim</option>
-                </select>
-
-                <label for="senha">Digite uma senha para sua conta:</label>
-                <input type="password" name="senha" id="senha">
-                
-                <button type="submit" class="submit-btn">Confirmar cadastro</button>
+                </select>        
+                   
+                <button type="submit" class="submit-btn">Confirmar</button>
             </form>
+        </div>
     </div>
+
+    <script>
+        const Modal = {
+            open(){
+                document
+                    .querySelector(".modal-overlay")
+                    .classList
+                    .add("active")
+            },
+            close(){
+                document
+                    .querySelector(".modal-overlay")
+                    .classList
+                    .remove("active")
+            }
+        }
+    </script>
 </body>
 
 </html>

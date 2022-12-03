@@ -78,7 +78,7 @@
         </div>
         
         <h2 class="title">Informe os dados da conta que deseja acessar</h2>
-        <form class="form-conta" action="cliente.php" method="POST">
+        <form class="form-conta" action="../php/valida-conta.php" method="POST">
             <input type="text" name="num_conta" placeholder="Numero da conta">
             <input type="password" name="senha" placeholder="Senha">
             <button class="submit-btn" type="submit">Entrar</button>

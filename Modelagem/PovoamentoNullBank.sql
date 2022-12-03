@@ -7,6 +7,8 @@ INSERT INTO Agencia(nome, salario_montante_total, cidade) VALUES
 ('Caixa','0.00','Itapipoca'); 
 SELECT * FROM Agencia;
 
+INSERT INTO Agencia(nome, salario_montante_total, cidade) VALUES (('Bradesco','0.00','Morrinhos'));
+
 -- POVOANDO CLIENTES
 INSERT INTO Clientes(cpf, nome_completo, rg, data_nasc, UF, orgao_emissor, logradouro, nome_logradouro, num_casa, bairro, cep, cidade, estado, senha_login) VALUES
 ('06965136332', 'Emanuel Dêvid Paulino Felix', '20160939584', '2000-07-27', 'CE', 'SSPDS', 'Rua', 'São Miguel', '5', 'São Luiz', '62550000', 'Morrinhos', 'Ceará', '123456'),
@@ -34,6 +36,11 @@ INSERT INTO Contas(agencia_id, saldo, senha, tipo_conta, conta_conjunta, gerente
 ('5', '0.00', '1674', 'poupanca', 'S', '1');
 SELECT * FROM Contas;
 
+SELECT MAX(num_conta) FROM  Contas;
+
+SELECT C.num_conta FROM Contas C 
+INNER JOIN Funcionarios F ON (C.gerente_matricula = F.matricula)
+AND F.cargo='gerente' AND C.agencia_id = '1' AND C.gerente_matricula = '1';
 
 INSERT INTO Contas(agencia_id, saldo, senha, tipo_conta, conta_conjunta, gerente_matricula) VALUES
 ('2', '0.00', '123456', 'corrente', 'N', '1');

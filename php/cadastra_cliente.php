@@ -24,7 +24,7 @@
         $stmt = $conexao->prepare("INSERT INTO Emails VALUES ('$cpf', '$email')");
 
         if($stmt->execute()){
-            header('Location: ../paginas/index.php');
+            header('Location: ../paginas/nova-conta.php');
         }
     }
 ?>

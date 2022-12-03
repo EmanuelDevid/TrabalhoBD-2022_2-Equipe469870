@@ -24,29 +24,86 @@
             
             <h3 class="subtitle">Informações para cadastro</h3>
             <div class="content-separator">
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Senha" required>
-                <input type="text" name="nome" placeholder="Nome completo" required>
-                <input type="date" name="data_nascimento" required>
+                <div class="input-content">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" placeholder="Preencher campo" required>
+                </div>
+
+                <div class="input-content">
+                    <label for="password">Senha</label>
+                    <input type="password" name="password" placeholder="Preencher campo" required>
+                </div>
+
+                <div class="input-content">
+                    <label for="nome">Nome completo</label>
+                    <input type="text" name="nome" placeholder="Preencher campo" required>
+                </div>
+                
+                <div class="input-content">
+                    <label for="data_nascimento">Data de nascimento</label>
+                    <input type="date" name="data_nascimento" placeholder="Preencher campo" required>
+                </div>
             </div>
             
             <h3 class="subtitle">Documentos</h3>
             <div class="content-separator">
-                <input type="text" name="cpf" maxlength="11" placeholder="CPF" required>
-                <input type="text" name="rg" maxlength="11" placeholder="RG" required>
-                <input type="text" name="uf" maxlength="2" placeholder="UF" required>
-                <input type="text" name="orgao_emissor" placeholder="Orgão emissor" required>
+                <div class="input-content">
+                    <label for="cpf">CPF</label>
+                    <input type="text" name="cpf" maxlength="11" placeholder="Preencher campo" required>
+                </div>
+
+                <div class="input-content">
+                    <label for="rg">RG</label>
+                    <input type="text" name="rg" maxlength="11" placeholder="Preencher campo" required>
+                </div>
+
+                <div class="input-content">
+                    <label for="uf">UF</label>
+                    <input type="text" name="uf" maxlength="2" placeholder="Preencher campo" required>
+                </div>
+                
+                <div class="input-content">
+                    <label for="orgao_emissor">Orgão emissor</label>
+                    <input type="text" name="orgao_emissor" placeholder="Preencher campo" required>
+                </div>
             </div>
 
             <h3 class="subtitle">Endereço</h3>
             <div class="content-separator endereco">
-                <input type="text" name="logradouro" placeholder="Logradouro" required>
-                <input type="text" name="nome_logradouro" placeholder="Nome do logradouro" required>
-                <input type="text" name="num_casa" placeholder="Número" required>
-                <input type="text" name="bairro" placeholder="Bairro" required>
-                <input type="text" name="cep" placeholder="CEP" required>
-                <input type="text" name="cidade" placeholder="Cidade" required>
-                <input type="text" name="estado" placeholder="Estado" required>
+                <div class="input-content">
+                    <label for="logradouro">Tipo de logradouro</label>
+                    <input type="text" name="logradouro" placeholder="Preencher campo" required>
+                </div>
+
+                <div class="input-content">
+                    <label for="nome_logradouro">Nome do logradouro</label>
+                    <input type="text" name="nome_logradouro" placeholder="Preencher campo" required>
+                </div>
+
+                <div class="input-content">
+                    <label for="num_casa">Número</label>
+                    <input type="text" name="num_casa" placeholder="Preencher campo" required>
+                </div>
+                
+                <div class="input-content">
+                    <label for="bairro">Bairro</label>
+                    <input type="text" name="bairro" placeholder="Preencher campo" required>
+                </div>
+
+                <div class="input-content">
+                    <label for="cep">CEP</label>
+                    <input type="text" name="cep" placeholder="Preencher campo" required>
+                </div>
+                
+                <div class="input-content">
+                    <label for="cidade">Cidade</label>
+                    <input type="text" name="cidade" placeholder="Preencher campo" required>
+                </div>
+
+                <div class="input-content">
+                    <label for="estado">Email</label>
+                    <input type="text" name="estado" placeholder="Preencher campo" required>
+                </div>
             </div>
 
             <button type="submit" class="submit-btn">Confirmar cadastro</button>

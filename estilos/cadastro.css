@@ -14,7 +14,7 @@
     font-size: 20px;
     font-weight: 700;
 
-    position: fixed;
+    position: absolute;
     left: 0;
     padding: 20px;
 
@@ -57,6 +57,18 @@
     margin: 20px 0;
 }
 
+.input-content {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.input-content label {
+    font-size: 700;
+    color: #F2ECE9;
+    margin-left: 15px;
+}
+
 .form input {
     background-color: #F2ECE9;
     color: #393E59;
@@ -64,7 +76,7 @@
     border: none;
     border-radius: 10px;
 
-    width: 40%;
+    width: 100%;
     padding: 10px;
     margin: 10px;
 }

@@ -375,7 +375,7 @@ DROP TRIGGER IF EXISTS `Equipe469870`.`tr_corrente`;
 
 DELIMITER $$
 USE `Equipe469870`$$ 
-CREATE DEFINER = CURRENT_USER TRIGGER `Equipe469870`.`tr_corrente` BEFORE INSERT ON `Contas` FOR EACH ROW
+CREATE DEFINER = CURRENT_USER TRIGGER `Equipe469870`.`tr_corrente` AFTER INSERT ON `Contas` FOR EACH ROW
 BEGIN
 	IF (NEW.tipo_conta = 'corrente') THEN
       INSERT INTO corrente(data_aniver_contrato,Contas_num_conta) VALUES

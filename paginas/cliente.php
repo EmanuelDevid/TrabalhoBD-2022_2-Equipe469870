@@ -4,15 +4,18 @@
 
     $cpf = $_SESSION["login_usuário"];
 
+    //pegando informações digitadas pelo o cliente na tela de escolher conta
+    $num_conta = $_POST['num_conta'];
+    $senha_informada = md5($_POST['senha']);
+
+    //pegando nome completo do cliente que está logado
     $stmt = $conexao->prepare("SELECT nome_completo FROM Clientes WHERE cpf = '$cpf'");
     if($stmt->execute()){
         $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $nome = $retorno_consulta[0]['nome_completo'];
     }
 
-    $num_conta = $_POST['num_conta'];
-    $senha_informada = md5($_POST['senha']);
-
+    //pegando cpf do dono da conta pertencente à agência cujo id foi informado na tela de escolher conta
     $stmt = $conexao->prepare("SELECT Clientes_cpf FROM Possui WHERE Contas_num_conta = '$num_conta'");
     if($stmt->execute()){
         $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -22,6 +25,7 @@
         }
     }
 
+    //pegando senha da conta pertencente à agência cujo id foi informado na tela de escolher conta
     $stmt = $conexao->prepare("SELECT senha FROM Contas WHERE num_conta = '$num_conta'");
     if($stmt->execute()){
         $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -31,6 +35,7 @@
         }
     }
 
+    //pegando saldo da conta pertencente à agência cujo id foi informado na tela de escolher conta
     $stmt = $conexao->prepare("SELECT saldo FROM CONTAS WHERE num_conta = '$num_conta'");
     if($stmt->execute()){
         $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -114,13 +119,14 @@
                 <h3 class="subtitle">Selecione um tipo de transação</h3>
                 <select name="select_transacoes" class="select_trancacoes" required>
                     <option id="opition_saque" value="saque">Saque</option>
-                    <option id="opition_deposito" value="deposito">Depósito</option>
-                    <option id="opition_transferencia" value="transferencia">Transferência</option>
+                    <option id="opition_deposito" value="depósito">Depósito</option>
+                    <option id="opition_transferencia" value="transferência">Transferência</option>
                     <option id="opition_estorno" value="estorno">Estorno</option>
+                    <option id="opition_pagamento" value="pagamento">Pagamento</option>
                 </select>
 
                 <h3 class="subtitle">Selecione o valor transação</h3>
-                <input type="text" name="valor_saque" placeholder="Valor do saque" required>
+                <input type="text" name="valor_transacao" placeholder="Valor da transação" required>
                 <button class="btn-submit-trasaction" type="submit">Confirmar</button>
             </form>
         </div>

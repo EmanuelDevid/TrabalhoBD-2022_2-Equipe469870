@@ -2,11 +2,21 @@
     include_once("../php/validador_acesso.php");
     include_once("../php/conexao.php");
 
+    //colocando o num_conta escolhido pelo usuário na superglobal $_SESSION para usar em transacao.php
+    $_SESSION['num_conta'] = $_POST['num_conta'];
+
     $cpf = $_SESSION["login_usuário"];
+
+    //pegando senha da conta que vem da página de transacao
+    
 
     //pegando informações digitadas pelo o cliente na tela de escolher conta
     $num_conta = $_POST['num_conta'];
     $senha_informada = md5($_POST['senha']);
+
+    if(isset($_SESSION['senha_conta'])){
+        $senha_informada = $_SESSION['senha_conta'];
+    }
 
     //pegando nome completo do cliente que está logado
     $stmt = $conexao->prepare("SELECT nome_completo FROM Clientes WHERE cpf = '$cpf'");
@@ -30,7 +40,7 @@
     if($stmt->execute()){
         $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $senha = $retorno_consulta[0]['senha'];
-        if($senha !== $senha_informada){
+        if($senha === $senha_informada){
             header('Location: escolha-conta.php?senha=erro');
         }
     }
@@ -114,7 +124,7 @@
             <a class="close-modal" onclick="Modal.close()">Cancelar</a>
             <h2 class="form-title">Nova transação</h2>
 
-            <form class="modal-form" action="" method="POST">
+            <form class="modal-form" action="../php/transacao.php" method="POST">
                 <h3 class="subtitle">Selecione um tipo de transação</h3>
                 <select name="select_transacoes" class="select_trancacoes" required>
                     <option id="opition_saque" value="saque">Saque</option>

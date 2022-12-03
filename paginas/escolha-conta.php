@@ -24,13 +24,15 @@
 </head>
 
 <body>
+    <a class="link-nova-conta" href="">Criar nova conta</a>
+
     <header class="header">
         <h1 class="logo">Nullbank</h1>
     </header>
 
     <main class="main">
-        <h2 class="title">Selecione uma de suas contas</h2>
-        
+        <h2 class="title">Contas cadastradas</h2>
+
         <?php 
             $stmt = $conexao->prepare("SELECT Contas_num_conta FROM Possui WHERE Clientes_cpf = '$cpf'");
             if($stmt->execute()){
@@ -50,30 +52,40 @@
                             $cidade = $retorno_consulta[0]['cidade'];
                         }
                     } ?>
-                <div class="card">
-                    <div>
-                        <h3 class="card-text">Numero da conta</h3>
-                        <p class="card-value-num-conta"><?php echo $num_conta ?></p>
+      
+                <div class="scroll-area">
+                    <div class="card">
+                        <div>
+                            <h3 class="card-text">Numero da conta</h3>
+                            <p class="card-value"><?php echo $num_conta ?></p>
+                        </div>
+    
+                        <div>
+                            <h3 class="card-text">Numero da agência</h3>
+                            <p class="card-value"><?php echo $agencia_id?></p>
+                        </div>
+    
+                        <div>
+                            <h3 class="card-text">Agência</h3>
+                            <p class="card-value"><?php echo $nome_agencia ?></p>
+                        </div>
+    
+                        <div>
+                            <h3 class="card-text">Local da agência</h3>
+                            <p class="card-value"><?php echo $cidade ?></p>
+                        </div>
                     </div>
 
-                    <div>
-                        <h3 class="card-text">Numero da agência</h3>
-                        <p class="card-value"><?php echo $agencia_id?></p>
-                    </div>
-
-                    <div>
-                        <h3 class="card-text">Agência</h3>
-                        <p class="card-value"><?php echo $nome_agencia ?></p>
-                    </div>
-
-                    <div>
-                        <h3 class="card-text">Local da agência</h3>
-                        <p class="card-value"><?php echo $cidade ?></p>
-                    </div>
-
-                    <button class="btn-seleciona-conta" onclick="redireciona()">Selecionar</button>
                 </div>
-            <?php }} ?>    
+        <?php }} ?>
+        
+        <h2 class="title">Informe os dados da conta que deseja acessar</h2>
+        <form class="form-conta" action="" method="POST">
+            
+            <input type="text" name="senha" placeholder="Numero da conta">
+            <input type="text" name="senha" placeholder="Senha">
+            <button class="submit-btn" type="submit">Entrar</button>
+        </form>
     </main>
 </body>
 </html>

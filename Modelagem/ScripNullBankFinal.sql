@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `Equipe469870`.`Funcionarios` (
   `sexo` ENUM('M', 'F') NOT NULL,
   `data_nasc` DATE NOT NULL,
   `salario` DECIMAL(18,2) NOT NULL,
-  `cargo` ENUM('gerente', 'atendente', 'caixa', 'dba') NOT NULL, -- incluindo o dba como um cargo de funcionários
+  `cargo` ENUM('gerente', 'atendente', 'caixa') NOT NULL,
   `agencia_id` INT NOT NULL,
   PRIMARY KEY (`matricula`),
   INDEX `fk_funcionarios_agência1_idx` (`agencia_id` ASC) VISIBLE,
@@ -258,20 +258,6 @@ END$$
 DELIMITER ;
 
 
--- Criação do trigger responsável por controlar a inserção de dependentes pra cada funcionário
-DROP TRIGGER IF EXISTS `Equipe469870`.`tr_numero_dependentes`;
-
-DELIMITER $$
-USE `Equipe469870`$$
-CREATE DEFINER = CURRENT_USER TRIGGER `Equipe469870`.`tr_numero_dependentes` BEFORE INSERT ON `Dependentes` FOR EACH ROW
-BEGIN
-	IF (SELECT COUNT(nome_completo) FROM  dependentes) >= 5 THEN
-      SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Already five rows dependentes';
-   END IF;
-END$$
-DELIMITER ;
-
-
 -- Criação do trigger responsável por garantir o salário mínimo de 2500.00 para os funcionário
 DROP TRIGGER IF EXISTS `Equipe469870`.`tr_salario_minimo`;
 
@@ -434,6 +420,46 @@ SET NEW.senha_login = MD5(NEW.senha_login);
 END$$
 DELIMITER ;
 
+
+-- Criação do trigger responsável por setar o limite de crédito inicial de uma conta especial como R$ 2000,00
+DROP TRIGGER IF EXISTS `Equipe469870`.`tr_especial`;
+
+DELIMITER $$
+USE Equipe469870$$ 
+CREATE DEFINER = CURRENT_USER TRIGGER Equipe469870.tr_especial AFTER INSERT ON Contas FOR EACH ROW
+BEGIN
+    IF (NEW.tipo_conta = 'especial') THEN
+      INSERT INTO Especial(limite_credito,Contas_num_conta) VALUES
+      (2000, NEW.num_conta);
+   END IF; 
+END$$
+DELIMITER ;
+
+
+-- Criação do trigger responsável por setar a taxa de juros de uma conta poupança como sendo 2% ao mês
+DROP TRIGGER IF EXISTS `Equipe469870`.`tr_poupanca`;
+
+DELIMITER $$
+USE Equipe469870$$ 
+CREATE DEFINER = CURRENT_USER TRIGGER Equipe469870.tr_poupanca AFTER INSERT ON Contas FOR EACH ROW
+BEGIN
+    IF (NEW.tipo_conta = 'poupanca') THEN
+      INSERT INTO Poupanca(taxa_juros,Contas_num_conta) VALUES
+      (0.02, NEW.num_conta);
+   END IF; 
+END$$
+DELIMITER ;
+
+-- Criação do trigger responsável por limitar um gerente por agência
+DELIMITER $$
+USE Equipe469870$$ 
+CREATE DEFINER = CURRENT_USER TRIGGER Equipe469870.tr_limita_gerente BEFORE INSERT ON Funcionarios FOR EACH ROW
+BEGIN
+    IF (SELECT COUNT(Matricula) FROM  Funcionarios  WHERE agencia_id= NEW.agencia_id)  AND NEW.cargo = 'gerente' > 0 THEN
+      SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Já há um gerente nessa agência';
+   END IF;
+END$$
+DELIMITER ;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

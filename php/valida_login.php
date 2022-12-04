@@ -24,7 +24,7 @@
 
                 switch ($cargo) {
                     case 'caixa':
-                        header('Location: funcionario.php');
+                        header('Location: ../paginas/caixa.php');
                         break;
                     case 'gerente':
                         header('Location: funcionario.php');

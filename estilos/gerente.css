@@ -258,7 +258,7 @@
     cursor: pointer;
     position: absolute;
     top: 0;
-    left: 3%;
+    left: 2%;
     margin: 20px;
 }
 
@@ -287,21 +287,18 @@
     box-shadow: inset 450px 0 0 0 #4AD96D;
 }
 
-.back-page-btn {
-    text-decoration: none;
-    color:#F2ECE9;
-    font-size: 20px;
+.close-modal {
+    color: #F2ECE9;
+    font-size: 18px;
     font-weight: 700;
-
+    text-decoration: none;
+    cursor: pointer;
     position: absolute;
-    left: 0;
-    padding: 20px;
-
-    transition: color .4s;
+    top: 0;
+    left: 2%;
+    margin: 20px;
 }
 
-.back-page-btn:hover {
+.close-modal:hover {
     color: #FF4C40;
 }
-
-

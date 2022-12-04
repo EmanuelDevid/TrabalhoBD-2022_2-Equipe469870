@@ -67,54 +67,119 @@
 
         <button class="add-transaction" onclick="Modal.open()">Adicionar transação</button>
 
-        <div class="scroll-area">
-            <?php 
-                 //pegando num_conta das contas da agência do caixa que está logado
-                 $stmt = $conexao->prepare("SELECT num_conta FROM Contas WHERE agencia_id = '$agencia_id'");
-                 if($stmt->execute()){
-                    $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    foreach($retorno_consulta as $tupla){
-                        $num_conta = $tupla['num_conta'];
+        <section class="cotent-area">
+            <div class="subtitle-divider">
+                <h3 class="subtitle">Clientes</h3>
+                
+                <div class="scroll-area">
+                    <div class="scroll-area">
+                        <?php 
+                             //pegando num_conta das contas da agência do caixa que está logado
+                             $stmt = $conexao->prepare("SELECT num_conta FROM Contas WHERE agencia_id = '$agencia_id'");
+                             if($stmt->execute()){
+                                $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                foreach($retorno_consulta as $tupla){
+                                    $num_conta = $tupla['num_conta'];
+                    
+                                    //pegando todas os atributos da tabela Transacao
+                                    $stmt = $conexao->prepare("SELECT * FROM Transacao WHERE Contas_num_conta = $num_conta");
+                                    if($stmt->execute()){
+                                        $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                        foreach($retorno_consulta as $tupla){
+                                            //armazenando as informações das transações em variáveis
+                                            $num_transacao = $tupla['num_transacao'];
+                                            $tipo_transacao = $tupla['tipo_transacao'];
+                                            $data_hora = $tupla['data_hora'];
+                                            $valor = $tupla['valor'];
+                                            $num_conta_transacao = $tupla['Contas_num_conta']; ?>
+                                            <div class="card">
+                                                <div>
+                                                    <h3 class="card-text">Número da conta</h3>
+                                                    <p class="card-value"><?php echo $num_conta_transacao ?></p>
+                                                </div>
+                    
+                                                <div>
+                                                    <h3 class="card-text">Número da transação</h3>
+                                                    <p class="card-value"><?php echo $num_transacao ?></p>
+                                                </div>
+                    
+                                                <div>
+                                                    <h3 class="card-text">Tipo</h3>
+                                                    <p class="card-value"><?php echo $tipo_transacao ?></p>
+                                                </div>
+                    
+                                                <div>
+                                                    <h3 class="card-text">Valor</h3>
+                                                    <p class="card-value"><?php echo $valor ?></p>
+                                                </div>
+                    
+                                                <div>
+                                                    <h3 class="card-text">Data</h3>
+                                                    <p class="card-value"><?php echo $data_hora ?></p>
+                                                </div>
+                                            </div>
+                        <?php }}}}?>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="vertical-divider"/>
 
-                        //pegando todas os atributos da tabela Transacao
-                        $stmt = $conexao->prepare("SELECT * FROM Transacao WHERE Contas_num_conta = $num_conta");
-                        if($stmt->execute()){
-                            $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                            foreach($retorno_consulta as $tupla){
-                                //armazenando as informações das transações em variáveis
-                                $num_transacao = $tupla['num_transacao'];
-                                $tipo_transacao = $tupla['tipo_transacao'];
-                                $data_hora = $tupla['data_hora'];
-                                $valor = $tupla['valor'];
-                                $num_conta_transacao = $tupla['Contas_num_conta']; ?>
-                                <div class="card">
-                                    <div>
-                                        <h3 class="card-text">Número da conta</h3>
-                                        <p class="card-value"><?php echo $num_conta_transacao ?></p>
-                                    </div>
-
-                                    <div>
-                                        <h3 class="card-text">Número da transação</h3>
-                                        <p class="card-value"><?php echo $num_transacao ?></p>
-                                    </div>
-
-                                    <div>
-                                        <h3 class="card-text">Tipo</h3>
-                                        <p class="card-value"><?php echo $tipo_transacao ?></p>
-                                    </div>
-
-                                    <div>
-                                        <h3 class="card-text">Valor</h3>
-                                        <p class="card-value"><?php echo $valor ?></p>
-                                    </div>
-
-                                    <div>
-                                        <h3 class="card-text">Data</h3>
-                                        <p class="card-value"><?php echo $data_hora ?></p>
-                                    </div>
-                                </div>
-            <?php }}}}?>
-        </div>
+            <div class="subtitle-divider">
+                <h3 class="subtitle">Funcionários</h3>
+                
+                <div class="scroll-area">
+                    <div class="scroll-area">
+                        <?php 
+                             //pegando num_conta das contas da agência do caixa que está logado
+                             $stmt = $conexao->prepare("SELECT num_conta FROM Contas WHERE agencia_id = '$agencia_id'");
+                             if($stmt->execute()){
+                                $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                foreach($retorno_consulta as $tupla){
+                                    $num_conta = $tupla['num_conta'];
+                    
+                                    //pegando todas os atributos da tabela Transacao
+                                    $stmt = $conexao->prepare("SELECT * FROM Transacao WHERE Contas_num_conta = $num_conta");
+                                    if($stmt->execute()){
+                                        $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                        foreach($retorno_consulta as $tupla){
+                                            //armazenando as informações das transações em variáveis
+                                            $num_transacao = $tupla['num_transacao'];
+                                            $tipo_transacao = $tupla['tipo_transacao'];
+                                            $data_hora = $tupla['data_hora'];
+                                            $valor = $tupla['valor'];
+                                            $num_conta_transacao = $tupla['Contas_num_conta']; ?>
+                                            <div class="card">
+                                                <div>
+                                                    <h3 class="card-text">Número da conta</h3>
+                                                    <p class="card-value"><?php echo $num_conta_transacao ?></p>
+                                                </div>
+                    
+                                                <div>
+                                                    <h3 class="card-text">usuário</h3>
+                                                    <p class="card-value"><?php echo $num_transacao ?></p>
+                                                </div>
+                    
+                                                <div>
+                                                    <h3 class="card-text">Tipo</h3>
+                                                    <p class="card-value"><?php echo $tipo_transacao ?></p>
+                                                </div>
+                    
+                                                <div>
+                                                    <h3 class="card-text">Saldo</h3>
+                                                    <p class="card-value"><?php echo $valor ?></p>
+                                                </div>
+                    
+                                                <div>
+                                                    <h3 class="card-text">Data</h3>
+                                                    <p class="card-value"><?php echo $data_hora ?></p>
+                                                </div>
+                                            </div>
+                        <?php }}}}?>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <div class="modal-overlay">

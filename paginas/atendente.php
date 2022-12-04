@@ -62,7 +62,6 @@
                 </div>
             </div>    
         </sectio>
-
     </main>
 </body>
 </html>

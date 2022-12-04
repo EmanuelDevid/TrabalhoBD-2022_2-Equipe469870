@@ -69,7 +69,7 @@
 
         <section class="cotent-area">
             <div class="subtitle-divider">
-                <h3 class="subtitle">Clientes</h3>
+                <h3 class="subtitle">Transações</h3>
                 
                 <div class="scroll-area">
                     <div class="scroll-area">
@@ -94,13 +94,8 @@
                                             $num_conta_transacao = $tupla['Contas_num_conta']; ?>
                                             <div class="card">
                                                 <div>
-                                                    <h3 class="card-text">Número da conta</h3>
+                                                    <h3 class="card-text">Nº conta</h3>
                                                     <p class="card-value"><?php echo $num_conta_transacao ?></p>
-                                                </div>
-                    
-                                                <div>
-                                                    <h3 class="card-text">Número da transação</h3>
-                                                    <p class="card-value"><?php echo $num_transacao ?></p>
                                                 </div>
                     
                                                 <div>
@@ -126,7 +121,7 @@
             <hr class="vertical-divider"/>
 
             <div class="subtitle-divider">
-                <h3 class="subtitle">Funcionários</h3>
+                <h3 class="subtitle">Contas</h3>
                 
                 <div class="scroll-area">
                     <div class="scroll-area">
@@ -151,12 +146,12 @@
                                             $num_conta_transacao = $tupla['Contas_num_conta']; ?>
                                             <div class="card">
                                                 <div>
-                                                    <h3 class="card-text">Número da conta</h3>
+                                                    <h3 class="card-text">Nº conta</h3>
                                                     <p class="card-value"><?php echo $num_conta_transacao ?></p>
                                                 </div>
                     
                                                 <div>
-                                                    <h3 class="card-text">usuário</h3>
+                                                    <h3 class="card-text">Usuário</h3>
                                                     <p class="card-value"><?php echo $num_transacao ?></p>
                                                 </div>
                     
@@ -168,11 +163,6 @@
                                                 <div>
                                                     <h3 class="card-text">Saldo</h3>
                                                     <p class="card-value"><?php echo $valor ?></p>
-                                                </div>
-                    
-                                                <div>
-                                                    <h3 class="card-text">Data</h3>
-                                                    <p class="card-value"><?php echo $data_hora ?></p>
                                                 </div>
                                             </div>
                         <?php }}}}?>

@@ -16,6 +16,11 @@
 .main {
     background-color: #F2ECE9;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
     width: 100%;
     min-height: 75vh;
 }
@@ -25,13 +30,12 @@
 
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
 
     width: 100%;
-    padding: 20px 0;
+    padding-bottom: 20px;
 }
 
-.card {
+.info-conta {
     background-color: #F2ECE9;
     color: #393E59;
 
@@ -49,105 +53,72 @@
     margin-right: 30px;
 }
 
+
+.scroll-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 80%;
+    height: auto;
+    max-height: 220px;
+    padding: 5px 0;
+    margin-bottom: 20px;
+    overflow-y: auto;
+}
+
+.card {
+    background-color: #F2ECE9;
+    color: #393E59;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 90%;
+    padding: 20px 30px;
+    margin-bottom: 15px;
+    border-bottom: 5px solid #05AFF2;
+    border-radius: 20px;
+}
+
 .title {
     color: #393E59;
     font-size: 1.8rem;
     font-weight: 700;
-    margin: 30px;
+    margin: 20px;
 }
 
 .subtitle {
-    color: #393E59;
-    font-size: 2rem;
-    font-weight: normal;
+    font-weight: 700;
 }
 
-.section-services {
-    background-color: #F2ECE9;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding-bottom: 20px;
+.help {
+    color: #F2ECE9;
 }
 
-.services-area {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    width: 80%;
-}
-
-.service-card {
-    width: 40%;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.service-card h3,
-.service-card hr {
-    color: #393E59;
-    margin-bottom: 5px;
-}
-
-.btn-submit-trasaction {
-    background-color: #05AFF2;
-    color: #393E59;
-
-    font-size: 20px;
-    font-weight: 900;
-
-    border: 2px solid #F2ECE9;
-    border-radius: 15px;
-    padding: 10px 20px;
-    margin-top: 20px;
-
-    cursor: pointer;
-    transition: .6s;
-}
-
-.btn-submit-trasaction:hover,
-.btn-submit-trasaction:focus {
-    box-shadow: inset 450px 0 0 0 #4AD96D;
-}
-
-.btn-select-trasaction {
+.add-transaction {
     background-color: #F2ECE9;
     color: #393E59;
 
     font-size: 20px;
     font-weight: 900;
+
+    position: absolute;
+    top: 49%;
+    right: 3%;
 
     border: 2px solid #05AFF2;
     border-radius: 15px;
     padding: 10px 20px;
-    margin-top: 20px;
 
     cursor: pointer;
     transition: .6s;
 }
 
-.btn-select-trasaction:hover,
-.btn-select-trasaction:focus {
+.add-transaction:hover,
+.add-transaction:focus {
     box-shadow: inset 450px 0 0 0 #4AD96D;
-}
-
-.back-page-btn {
-    text-decoration: none;
-    color:#F2ECE9;
-    font-size: 20px;
-    font-weight: 700;
-
-    position: fixed;
-    left: 0;
-    padding: 20px;
-
-    transition: color .4s;
-}
-
-.back-page-btn:hover {
-    color: #FF4C40;
 }
 
 .modal-overlay {
@@ -182,7 +153,8 @@
     align-items: center;
     justify-content: center;
 
-    padding: 4rem;
+    width: 30%;
+    padding: 3rem;
     position: relative;
     border-radius: 30px;
 }
@@ -197,14 +169,18 @@
     max-width: 600px;
 }
 
-.modal-form input {
+.modal-form input, 
+.modal-form select {
     background-color: #F2ECE9;
     color: #393E59;
-    font-size: 20px;
+    font-size: 18px;
     border: none;
     border-radius: 10px;
+
+    width: 80%;
     padding: 10px;
     margin: 10px;
+
 }
 
 .form-title {
@@ -230,30 +206,42 @@
     color: #FF4C40;
 }
 
-.help {
-    color: #F2ECE9;
-    font-size: 15px;
-}
-
-.subtitle {
+.btn-submit-trasaction {
+    background-color: #05AFF2;
     color: #393E59;
-    font-size: 1.3rem;
+
+    font-size: 20px;
     font-weight: 900;
-    margin-bottom: 10px;
-    margin-top: 20px;
-}
 
-.select_trancacoes {
-    background-color: #F2ECE9;
-    color: #393E59;
+    border: 2px solid #F2ECE9;
+    border-radius: 15px;
+    padding: 5px 20px;
+    margin-top: 10px;
 
-    font-size: 18px;
-    font-weight: 700;
-    text-align: center;
-
-    width: 80%;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 10px;
     cursor: pointer;
+    transition: .6s;
 }
+
+.btn-submit-trasaction:hover,
+.btn-submit-trasaction:focus {
+    box-shadow: inset 450px 0 0 0 #4AD96D;
+}
+
+.back-page-btn {
+    text-decoration: none;
+    color:#F2ECE9;
+    font-size: 20px;
+    font-weight: 700;
+
+    position: absolute;
+    left: 0;
+    padding: 20px;
+
+    transition: color .4s;
+}
+
+.back-page-btn:hover {
+    color: #FF4C40;
+}
+
+

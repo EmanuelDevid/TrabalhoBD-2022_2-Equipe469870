@@ -30,7 +30,7 @@
             </div>
 
             <div class="info-conta">
-                <img class="icon" src="../imagens/user.png" alt="icone do usuário">
+                <img class="icon" src="../imagens/company.png" alt="icone da agência">
                 <div>
                     <h3 class="card-text">Numero da agência</h3>
                     <p class="card-value">6</p>
@@ -38,7 +38,7 @@
             </div>
         </section>
 
-        <sectio class="content-area">
+        <section class="content-area">
             <h2 class="title">Contas</h2>
             <div class="card">
                 <div>
@@ -61,8 +61,7 @@
                     <p class="card-value">4000,00</p>
                 </div>
             </div>    
-        </sectio>
-
+        </section>
     </main>
 </body>
 </html>

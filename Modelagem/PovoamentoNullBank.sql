@@ -43,7 +43,7 @@ INNER JOIN Funcionarios F ON (C.gerente_matricula = F.matricula)
 AND F.cargo='gerente' AND C.agencia_id = '1' AND C.gerente_matricula = '1';
 
 INSERT INTO Contas(agencia_id, saldo, senha, tipo_conta, conta_conjunta, gerente_matricula) VALUES
-('2', '0.00', '123456', 'corrente', 'N', '1');
+('2', '0.00', '123456', 'corrente', 'S', '1');
 
 -- POVOANDO POSSUI
 INSERT INTO Possui(Clientes_cpf, Contas_num_conta, Contas_agencia_id) VALUES

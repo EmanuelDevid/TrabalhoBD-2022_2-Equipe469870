@@ -122,7 +122,7 @@
             <a class="close-modal" onclick="Modal.close()">Cancelar</a>
             <h2 class="form-title">Nova transação</h2>
 
-            <form class="modal-form" action="../php/transacao.php" method="POST">
+            <form class="modal-form" action="../php/transacao_caixa.php" method="POST">
                 <label for="num_conta" class="subtitle">Numero da conta</label>
                 <input type="text" name="num_conta" required>
 

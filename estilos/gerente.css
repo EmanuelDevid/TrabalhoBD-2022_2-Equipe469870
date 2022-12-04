@@ -81,7 +81,6 @@
     border-radius: 2px;
 }
 
-
 .card {
     background-color: #FFF;
     color: #393E59;
@@ -259,15 +258,8 @@
     cursor: pointer;
     position: absolute;
     top: 0;
+    left: 3%;
     margin: 20px;
-}
-
-.back-page {
-    left: 0;
-}
-
-.new-acc {
-    left: 5%;
 }
 
 .link-btn:hover {

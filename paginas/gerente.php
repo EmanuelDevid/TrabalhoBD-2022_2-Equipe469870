@@ -15,8 +15,7 @@
 
 </head>
 <body>
-    <a class="link-btn back-page" href="../php/logoff.php">Sair</a>
-    <a class="link-btn new-acc" href="./nova-conta.php">Criar nova conta</a>
+    <a class="link-btn" href="../php/logoff.php">Sair</a>
 
     <header class="header">
         <h1 class="logo">Nullbank</h1>

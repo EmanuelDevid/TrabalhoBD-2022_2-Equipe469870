@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="input-content">
-                    <label for="estado">Email</label>
+                    <label for="estado">Estado</label>
                     <input type="text" name="estado" placeholder="Preencher campo" required>
                 </div>
             </div>

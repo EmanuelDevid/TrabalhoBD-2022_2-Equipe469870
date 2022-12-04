@@ -1,3 +1,18 @@
+<?php
+    include_once("../php/validador_acesso.php");
+    include_once("../php/conexao.php");
+
+    $matricula = $_SESSION['login_funcionario'];
+
+    //pegando nome e agencia_id do atendente que está logado
+    $stmt = $conexao->prepare("SELECT nome_completo, agencia_id FROM Funcionarios WHERE matricula = '$matricula'");
+    if($stmt->execute()){
+        $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $nome = $retorno_consulta[0]['nome_completo'];
+        $agencia_id = $retorno_consulta[0]['agencia_id'];
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -25,7 +40,7 @@
                 <img class="icon" src="../imagens/user.png" alt="icone do usuário">
                 <div>
                     <h3 class="card-text">Atendente</h3>
-                    <p class="card-value">Chico Sulino da Silva</p>
+                    <p class="card-value"><?php echo $nome ?></p>
                 </div>
             </div>
 
@@ -33,35 +48,74 @@
                 <img class="icon" src="../imagens/user.png" alt="icone do usuário">
                 <div>
                     <h3 class="card-text">Numero da agência</h3>
-                    <p class="card-value">6</p>
+                    <p class="card-value"><?php echo $agencia_id ?></p>
                 </div>
             </div>
         </section>
 
-        <sectio class="content-area">
+        <section class="content-area">
             <h2 class="title">Contas</h2>
-            <div class="card">
-                <div>
-                    <h3 class="card-text">Numero da conta</h3>
-                    <p class="card-value">2</p>
-                </div>
+                <?php 
+                    //pegando informações sobre as contas
+                    $stmt = $conexao->prepare("SELECT num_conta, agencia_id, saldo, tipo_conta, conta_conjunta FROM Contas WHERE agencia_id = '$agencia_id'");
+                    if($stmt->execute()){
+                        $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        foreach($retorno_consulta as $tupla){ 
+                            $num_conta = $tupla['num_conta'];
+                            $agencia_id_conta = $tupla['agencia_id'];
+                            $saldo = $tupla['saldo'];
+                            $tipo_conta = $tupla['tipo_conta'];
+                            $conta_conjunta = $tupla['conta_conjunta'];
 
-                <div>
-                    <h3 class="card-text">Usuário</h3>
-                    <p class="card-value">Igor Pierre</p>
-                </div>
+                            $modalidade;
+                            if($conta_conjunta === 'S'){
+                                $modalidade = "Conjunta";
+                            }else if($conta_conjunta === 'N'){
+                                $modalidade = "Pessoal";
+                            }
 
-                <div>
-                    <h3 class="card-text">Tipo da conta</h3>
-                    <p class="card-value">Poupança</p>
-                </div>
+                            //pegando os cpfs dos clientes que possuem as contas
+                            $stmt = $conexao->prepare("SELECT Clientes_cpf FROM Possui WHERE Contas_num_conta = '$num_conta'");
+                            if($stmt->execute()){
+                                $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                $cpf = $retorno_consulta[0]['Clientes_cpf'];
 
-                <div>
-                    <h3 class="card-text">Saldo</h3>
-                    <p class="card-value">4000,00</p>
-                </div>
-            </div>    
-        </sectio>
+                                //pegando o nome do cliente pelo seu cpf
+                                $stmt = $conexao->prepare("SELECT nome_completo FROM Clientes WHERE cpf = '$cpf'");
+                                if($stmt->execute()){
+                                    $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                    $nome_cliente = $retorno_consulta[0]['nome_completo'];
+                                }
+                            }
+                            ?>
+                            <div class="card">
+                                <div>
+                                    <h3 class="card-text">Numero da conta</h3>
+                                    <p class="card-value"><?php echo $num_conta ?></p>
+                                </div>
+
+                                <div>
+                                    <h3 class="card-text">Usuário</h3>
+                                    <p class="card-value"><?php echo $nome_cliente ?></p>
+                                </div>
+
+                                <div>
+                                    <h3 class="card-text">Tipo da conta</h3>
+                                    <p class="card-value"><?php echo $tipo_conta ?></p>
+                                </div>
+
+                                <div>
+                                    <h3 class="card-text">Modalidade</h3>
+                                    <p class="card-value"><?php echo $modalidade ?></p>
+                                </div>
+
+                                <div>
+                                    <h3 class="card-text">Saldo</h3>
+                                    <p class="card-value"><?php echo $saldo ?></p>
+                                </div>
+                            </div>
+                <?php }} ?>    
+        </section>
 
     </main>
 </body>

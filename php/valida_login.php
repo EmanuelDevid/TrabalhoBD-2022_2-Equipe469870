@@ -30,10 +30,10 @@
                         header('Location: funcionario.php');
                         break;
                     case 'atendente':
-                        header('Location: funcionario.php');
+                        header('Location: ../paginas/atendente.php');
                         break;
                 }
-
+                $_SESSION['login_funcionario'] = $login;
                 $_SESSION['autenticado'] = 'sim';
             }
         }else{

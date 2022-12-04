@@ -81,7 +81,7 @@
                 <label for="tipo_conta">Tipo de conta</label>
                 <select name="tipo_conta">
                     <option value="poupanca">Poupança</option>
-                    <option value="corente">Corrente</option>
+                    <option value="corrente">Corrente</option>
                     <option value="especial">Especial</option>
                 </select>
                       

@@ -262,6 +262,12 @@
     margin-bottom: 8px;
 }
 
+.label-form {
+    color: #393E59;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
 .cotent-area {
     display: flex;
     justify-content: space-evenly;

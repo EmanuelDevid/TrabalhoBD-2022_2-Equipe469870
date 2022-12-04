@@ -182,7 +182,7 @@
                 <input type="text" name="num_conta" required>
 
 
-                <label for="select_transacoes" class="subtitle">Selecione um tipo de transação</label>
+                <label for="select_transacoes" class="label-form">Selecione um tipo de transação</label>
                 <select name="select_transacoes" class="select_trancacoes" required>
                     <option id="opition_saque" value="saque">Saque</option>
                     <option id="opition_deposito" value="depósito">Depósito</option>

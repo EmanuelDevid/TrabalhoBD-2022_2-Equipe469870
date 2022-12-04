@@ -1,3 +1,26 @@
+<?php
+    include_once('../php/validador_acesso.php');
+    include_once('../php/conexao.php');
+
+    //pegando a matricula do caixa que está logado
+    $matricula = $_SESSION['login_funcionario'];
+
+    //pegando nome e agencia_id do caixa que está logado
+    $stmt = $conexao->prepare("SELECT nome_completo, agencia_id FROM Funcionarios WHERE matricula = '$matricula'");
+    if($stmt->execute()){
+        $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $nome = $retorno_consulta[0]['nome_completo'];
+        $agencia_id = $retorno_consulta[0]['agencia_id'];
+
+        //pegando nome da agência do caixa que está logado
+        $stmt = $conexao->prepare("SELECT nome FROM Agencia WHERE id = '$agencia_id'");
+        if($stmt->execute()){
+            $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $nome_agência = $retorno_consulta[0]['nome'];
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -27,15 +50,15 @@
                 <img class="icon" src="../imagens/user.png" alt="icone do usuário">
                 <div>
                     <h3 class="card-text">Caixa</h3>
-                    <p class="card-value">Chico Sulino da Silva</p>
+                    <p class="card-value"><?php echo $nome ?></p>
                 </div>
             </div>
 
             <div class="info-conta">
                 <img class="icon" src="../imagens/company.png" alt="icone do usuário">
                 <div>
-                    <h3 class="card-text">Numero da agência</h3>
-                    <p class="card-value">6</p>
+                    <h3 class="card-text">Agência</h3>
+                    <p class="card-value"><?php echo $nome_agência . ' - ' . $agencia_id ?></p>
                 </div>
             </div>
         </section>
@@ -45,32 +68,52 @@
         <button class="add-transaction" onclick="Modal.open()">Adicionar transação</button>
 
         <div class="scroll-area">
-            <div class="card">
-                <div>
-                    <h3 class="card-text">Número da conta</h3>
-                    <p class="card-value">3</p>
-                </div>
+            <?php 
+                 //pegando num_conta das contas da agência do caixa que está logado
+                 $stmt = $conexao->prepare("SELECT num_conta FROM Contas WHERE agencia_id = '$agencia_id'");
+                 if($stmt->execute()){
+                    $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($retorno_consulta as $tupla){
+                        $num_conta = $tupla['num_conta'];
 
-                <div>
-                    <h3 class="card-text">Número da transação</h3>
-                    <p class="card-value">23</p>
-                </div>
+                        //pegando todas os atributos da tabela Transacao
+                        $stmt = $conexao->prepare("SELECT * FROM Transacao WHERE Contas_num_conta = $num_conta");
+                        if($stmt->execute()){
+                            $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            foreach($retorno_consulta as $tupla){
+                                //armazenando as informações das transações em variáveis
+                                $num_transacao = $tupla['num_transacao'];
+                                $tipo_transacao = $tupla['tipo_transacao'];
+                                $data_hora = $tupla['data_hora'];
+                                $valor = $tupla['valor'];
+                                $num_conta_transacao = $tupla['Contas_num_conta']; ?>
+                                <div class="card">
+                                    <div>
+                                        <h3 class="card-text">Número da conta</h3>
+                                        <p class="card-value"><?php echo $num_conta_transacao ?></p>
+                                    </div>
 
-                <div>
-                    <h3 class="card-text">Tipo</h3>
-                    <p class="card-value">Saque</p>
-                </div>
+                                    <div>
+                                        <h3 class="card-text">Número da transação</h3>
+                                        <p class="card-value"><?php echo $num_transacao ?></p>
+                                    </div>
 
-                <div>
-                    <h3 class="card-text">Valor</h3>
-                    <p class="card-value">4000,00</p>
-                </div>
+                                    <div>
+                                        <h3 class="card-text">Tipo</h3>
+                                        <p class="card-value"><?php echo $tipo_transacao ?></p>
+                                    </div>
 
-                <div>
-                    <h3 class="card-text">Data</h3>
-                    <p class="card-value">22/12/2000 - 22:34</p>
-                </div>
-            </div>
+                                    <div>
+                                        <h3 class="card-text">Valor</h3>
+                                        <p class="card-value"><?php echo $valor ?></p>
+                                    </div>
+
+                                    <div>
+                                        <h3 class="card-text">Data</h3>
+                                        <p class="card-value"><?php echo $data_hora ?></p>
+                                    </div>
+                                </div>
+            <?php }}}}?>
         </div>
     </main>
 

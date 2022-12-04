@@ -13,7 +13,7 @@
     }
 
     //pegando saldo da conta pertencente à agência cujo id foi informado na tela de escolher conta
-    $stmt = $conexao->prepare("SELECT saldo FROM CONTAS WHERE num_conta = '$num_conta'");
+    $stmt = $conexao->prepare("SELECT saldo FROM Contas WHERE num_conta = '$num_conta'");
     if($stmt->execute()){
         $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $saldo = $retorno_consulta[0]['saldo'];

@@ -183,7 +183,7 @@
             <h2 class="form-title">Nova transação</h2>
 
             <form class="modal-form" action="../php/transacao_caixa.php" method="POST">
-                <label for="num_conta" class="subtitle">Numero da conta</label>
+                <label for="num_conta" class="label-form">Numero da conta</label>
                 <input type="text" name="num_conta" required>
 
 
@@ -196,7 +196,7 @@
                     <option id="opition_pagamento" value="pagamento">Pagamento</option>
                 </select>
 
-                <label for="valor_transacao" class="subtitle">Informe o valor da transação</label>
+                <label for="valor_transacao" class="label-form">Informe o valor da transação</label>
                 <small class="help">Valor em reais, ex: 200,00</small>
                 <input type="text" name="valor_transacao" required>
 

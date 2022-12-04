@@ -1,3 +1,12 @@
+<?php
+    include_once('../php/validador_acesso.php');
+    include_once('../php/conexao.php');
+
+    //pegando a matricula do gerente que está logado
+    $matricula = $_SESSION['login_funcionario'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>

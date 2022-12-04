@@ -127,45 +127,50 @@
                     <div class="scroll-area">
                         <?php 
                              //pegando num_conta das contas da agência do caixa que está logado
-                             $stmt = $conexao->prepare("SELECT num_conta FROM Contas WHERE agencia_id = '$agencia_id'");
+                             $stmt = $conexao->prepare("SELECT num_conta, saldo, tipo_conta FROM Contas WHERE agencia_id = '$agencia_id'");
                              if($stmt->execute()){
                                 $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 foreach($retorno_consulta as $tupla){
-                                    $num_conta = $tupla['num_conta'];
-                    
-                                    //pegando todas os atributos da tabela Transacao
-                                    $stmt = $conexao->prepare("SELECT * FROM Transacao WHERE Contas_num_conta = $num_conta");
+                                    $num_conta2 = $tupla['num_conta'];
+                                    $saldo = $tupla['saldo'];
+                                    $tipo_conta = $tupla['saldo'];
+                                    
+                                    //pegando o cpf do dono da conta em questão
+                                    $stmt = $conexao->prepare("SELECT Clientes_cpf FROM Possui WHERE Contas_num_conta = $num_conta2");
                                     if($stmt->execute()){
                                         $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                                        foreach($retorno_consulta as $tupla){
-                                            //armazenando as informações das transações em variáveis
-                                            $num_transacao = $tupla['num_transacao'];
-                                            $tipo_transacao = $tupla['tipo_transacao'];
-                                            $data_hora = $tupla['data_hora'];
-                                            $valor = $tupla['valor'];
-                                            $num_conta_transacao = $tupla['Contas_num_conta']; ?>
+                                        $cpf = $retorno_consulta[0]['Clientes_cpf'];
+
+                                        //pegando o nome do dono da conta questão
+                                        $stmt = $conexao->prepare("SELECT nome_completo FROM Clientes WHERE cpf = '$cpf'");
+                                        if($stmt->execute()){
+                                            $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                            $nome_completo = $retorno_consulta[0]['nome_completo'];
+                                        }
+                                    } ?>
+                                        
                                             <div class="card">
                                                 <div>
                                                     <h3 class="card-text">Nº conta</h3>
-                                                    <p class="card-value"><?php echo $num_conta_transacao ?></p>
+                                                    <p class="card-value"><?php echo $num_conta2 ?></p>
                                                 </div>
                     
                                                 <div>
                                                     <h3 class="card-text">Usuário</h3>
-                                                    <p class="card-value"><?php echo $num_transacao ?></p>
+                                                    <p class="card-value"><?php echo $nome_completo ?></p>
                                                 </div>
                     
                                                 <div>
                                                     <h3 class="card-text">Tipo</h3>
-                                                    <p class="card-value"><?php echo $tipo_transacao ?></p>
+                                                    <p class="card-value"><?php echo $tipo_conta ?></p>
                                                 </div>
                     
                                                 <div>
                                                     <h3 class="card-text">Saldo</h3>
-                                                    <p class="card-value"><?php echo $valor ?></p>
+                                                    <p class="card-value"><?php echo $saldo ?></p>
                                                 </div>
                                             </div>
-                        <?php }}}}?>
+                        <?php }}?>
                     </div>
                 </div>
             </div>

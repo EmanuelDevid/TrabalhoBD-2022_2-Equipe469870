@@ -27,7 +27,7 @@
     justify-content: space-evenly;
 
     width: 100%;
-    padding: 20px 0;
+    padding-bottom: 20px;
 }
 
 .info-conta {
@@ -77,8 +77,8 @@
 
 .title {
     color: #393E59;
-    font-size: 2.4rem;
-    font-weight: 900;
+    font-size: 1.8rem;
+    font-weight: 700;
     margin: 30px;
 }
 

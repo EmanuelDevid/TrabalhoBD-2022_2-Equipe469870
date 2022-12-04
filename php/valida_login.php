@@ -27,7 +27,7 @@
                         header('Location: ../paginas/caixa.php');
                         break;
                     case 'gerente':
-                        header('Location: funcionario.php');
+                        header('Location: ../paginas/gerente.php');
                         break;
                     case 'atendente':
                         header('Location: ../paginas/atendente.php');

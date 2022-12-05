@@ -108,12 +108,12 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 60%;
+    width: 50%;
     max-height: 240px;
 }
 
 .divider2 {
-    width: 30%;
+    width: 40%;
 }
 
 .subtitle {

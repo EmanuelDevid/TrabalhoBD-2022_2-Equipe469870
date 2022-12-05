@@ -182,7 +182,7 @@
             <a class="close-modal" onclick="Modal.close()">Cancelar</a>
             <h2 class="form-title">Editar dados do cliente</h2>
 
-            <form class="modal-form" action="../php/transacao.php" method="POST">
+            <form class="modal-form" action="../php/altera-dados-cliente.php" method="POST">
                 <div class="content-separator endereco">
                     <div class="input-content">
                         <label for="CPF">CPF do cliente</label>
@@ -232,7 +232,7 @@
             <a class="close-modal" onclick="Modal.close()">Cancelar</a>
             <h2 class="form-title">Editar dados do funcionário</h2>
 
-            <form class="modal-form" action="../php/transacao.php" method="POST">
+            <form class="modal-form" action="../php/alter-dados-funcionario.php" method="POST">
                 <div class="content-separator endereco">
                     <div class="input-content">
                         <label for="matricula">Matricula do funcionário</label>

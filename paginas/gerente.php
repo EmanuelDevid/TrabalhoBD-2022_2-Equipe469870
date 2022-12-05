@@ -5,6 +5,20 @@
     //pegando a matricula do gerente que está logado
     $matricula = $_SESSION['login_funcionario'];
 
+    //pegando nome e agência_id do gerente que está logado
+    $stmt = $conexao->prepare("SELECT nome_completo, agencia_id FROM Funcionarios WHERE matricula = '$matricula'");
+    if($stmt->execute()){
+        $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $nome_gerente = $retorno_consulta[0]['nome_completo'];
+        $agencia_id = $retorno_consulta[0]['agencia_id'];
+
+        //pegando nome da agência
+        $stmt = $conexao->prepare("SELECT nome FROM Agencia WHERE id = '$agencia_id'");
+        if($stmt->execute()){
+            $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $nome_agencia = $retorno_consulta[0]['nome'];
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +50,7 @@
                 <img class="icon" src="../imagens/user.png" alt="icone do usuário">
                 <div>
                     <h3 class="card-text">Gerente</h3>
-                    <p class="card-value">Fernando Rodrigues Lima</p>
+                    <p class="card-value"><?php echo $nome_gerente ?></p>
                 </div>
             </div>
 
@@ -44,7 +58,7 @@
                 <img class="icon" src="../imagens/company.png" alt="icone do usuário">
                 <div>
                     <h3 class="card-text">Numero da agência</h3>
-                    <p class="card-value">6</p>
+                    <p class="card-value"><?php echo $nome_agencia . ' - ' . $agencia_id?></p>
                 </div>
             </div>
         </section>
@@ -61,106 +75,103 @@
                 <h3 class="subtitle">Clientes</h3>
                 
                 <div class="scroll-area">
-                    <div class="card">
-                        <div>
-                            <h3 class="card-text">Número</h3>
-                            <p class="card-value">3</p>
-                        </div>
-        
-                        <div>
-                            <h3 class="card-text">Nome</h3>
-                            <p class="card-value">Igor pierre</p>
-                        </div>
-        
-                        <div>
-                            <h3 class="card-text">CPF</h3>
-                            <p class="card-value">080589843</p>
-                        </div>
-        
-                        <div>
-                            <h3 class="card-text">Tipo</h3>
-                            <p class="card-value">Poupança</p>
-                        </div>
-        
-                        <div>
-                            <h3 class="card-text">Modalidade</h3>
-                            <p class="card-value">Poupança</p>
-                        </div>
-                    </div>
+                    <?php 
+                        //pegando num_conta das contas da agência do caixa que está logado
+                        $stmt = $conexao->prepare("SELECT Clientes_cpf, Contas_num_conta FROM Possui WHERE Contas_agencia_id = '$agencia_id'");
+                        if($stmt->execute()){
+                           $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                           foreach($retorno_consulta as $tupla){//pegando cada tupla do resultado
+                               $num_conta = $tupla['Contas_num_conta'];
+                               $cpf = $tupla['Clientes_cpf'];
+
+                               $stmt = $conexao->prepare("SELECT nome_completo FROM Clientes WHERE cpf = '$cpf'");
+                               if($stmt->execute()){
+                                    $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                    $nome_cliente = $retorno_consulta[0]['nome_completo'];
+                                }
+                    
+                               //pegando tipos das contas e suas modalidades (Conjunta ou Pessoal)
+                               $stmt = $conexao->prepare("SELECT tipo_conta, conta_conjunta FROM Contas WHERE num_conta = $num_conta");
+                               if($stmt->execute()){
+                                   $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                   $tipo_conta = $retorno_consulta[0]['tipo_conta'];
+                                   $conta_conjunta = $retorno_consulta[0]['conta_conjunta'];
+
+                                   $tipo_conta2; //tratando o valor que vem do banco para uma melhor exibição
+                                    if($tipo_conta === 'poupanca'){
+                                        $tipo_conta2 = "Poupança";
+                                    } else if($tipo_conta === 'especial'){
+                                        $tipo_conta2 = "Especial";
+                                    } else if($tipo_conta === 'corrente'){
+                                        $tipo_conta2 = "Corrente";
+                                    }
+
+                                   $modalidade;
+                                    if($conta_conjunta === 'S'){
+                                        $modalidade = "Conjunta";
+                                    }else if($conta_conjunta === 'N'){
+                                        $modalidade = "Pessoal";
+                                    }
+                               } ?>
+                                       <div class="card">
+                                            <div>
+                                                <h3 class="card-text">Nome</h3>
+                                                <p class="card-value"><?php echo $nome_cliente ?></p>
+                                            </div>
+                            
+                                            <div>
+                                                <h3 class="card-text">CPF</h3>
+                                                <p class="card-value"><?php echo $cpf ?></p>
+                                            </div>
+
+                                            <div>
+                                                <h3 class="card-text">N° Conta</h3>
+                                                <p class="card-value"><?php echo $num_conta ?></p>
+                                            </div>
+                            
+                                            <div>
+                                                <h3 class="card-text">Tipo</h3>
+                                                <p class="card-value"><?php echo $tipo_conta2 ?></p>
+                                            </div>
+                                        </div>
+                        <?php }}?>
                 </div>
             </div>
             
             <hr class="vertical-divider"/>
 
-            <div class="subtitle-divider">
+            <div class="subtitle-divider divider2">
                 <h3 class="subtitle">Funcionários</h3>
                 
                 <div class="scroll-area">
-                    <div class="card">
-                        <div>
-                            <h3 class="card-text">Número</h3>
-                            <p class="card-value">3</p>
-                        </div>
-        
-                        <div>
-                            <h3 class="card-text">Nome</h3>
-                            <p class="card-value">Wendel Manfrini</p>
-                        </div>
-        
-                        <div>
-                            <h3 class="card-text">CPF</h3>
-                            <p class="card-value">080589843</p>
-                        </div>
-        
-                        <div>
-                            <h3 class="card-text">Cargo</h3>
-                            <p class="card-value">Poupança</p>
-                        </div>
-                    </div>
+                <?php 
+                    //pegando informações dos funcionários (que não são gerente) da agência
+                    $stmt = $conexao->prepare("SELECT matricula, nome_completo, cargo FROM Funcionarios WHERE agencia_id = '$agencia_id' AND cargo <> 'gerente'");
+                    if($stmt->execute()){
+                       $retorno_consulta = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                       foreach($retorno_consulta as $tupla){//pegando cada tupla do resultado
+                           $matricula_func = $tupla['matricula'];
+                           $nome_func = $tupla['nome_completo'];
+                           $cargo = $tupla['cargo'];
 
-                    <div class="card">
-                        <div>
-                            <h3 class="card-text">Número</h3>
-                            <p class="card-value">3</p>
-                        </div>
-        
-                        <div>
-                            <h3 class="card-text">Nome</h3>
-                            <p class="card-value">Wendel Manfrini</p>
-                        </div>
-        
-                        <div>
-                            <h3 class="card-text">Matrícula</h3>
-                            <p class="card-value">080589843</p>
-                        </div>
-        
-                        <div>
-                            <h3 class="card-text">Cargo</h3>
-                            <p class="card-value">Poupança</p>
-                        </div>
-                    </div>
+                ?>
+                            <div class="card">
+                                <div>
+                                    <h3 class="card-text">Matricula</h3>
+                                    <p class="card-value"><?php echo $matricula_func ?></p>
+                                </div>
 
-                    <div class="card">
-                        <div>
-                            <h3 class="card-text">Número</h3>
-                            <p class="card-value">3</p>
-                        </div>
-        
-                        <div>
-                            <h3 class="card-text">Nome</h3>
-                            <p class="card-value">Wendel Manfrini</p>
-                        </div>
-        
-                        <div>
-                            <h3 class="card-text">CPF</h3>
-                            <p class="card-value">080589843</p>
-                        </div>
-        
-                        <div>
-                            <h3 class="card-text">Cargo</h3>
-                            <p class="card-value">Poupança</p>
-                        </div>
-                    </div>
+                                <div>
+                                    <h3 class="card-text">Nome</h3>
+                                    <p class="card-value"><?php echo $nome_func ?></p>
+                                </div>
+                            
+                                <div>
+                                    <h3 class="card-text">Cargo</h3>
+                                    <p class="card-value"><?php echo $cargo ?></p>
+                                </div>
+                            </div>
+                        <?php }}?>
                 </div>
             </div>
         </section>

@@ -47,7 +47,7 @@
                     $_SESSION['login_usuário'] = $login;
                 }else{
                     if($login === "Admin" && $senha = "Root"){
-                        header('Location: dba.php');
+                        header('Location: https://www.db4free.net/phpMyAdmin/index.php?route=/database/structure&db=nullbank_469870');
                     } else{
                         header('Location: ../paginas/index.php?login=erro');
                         $_SESSION['autenticado'] = 'nao';

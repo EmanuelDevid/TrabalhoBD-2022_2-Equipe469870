@@ -133,7 +133,16 @@
                                 foreach($retorno_consulta as $tupla){
                                     $num_conta2 = $tupla['num_conta'];
                                     $saldo = $tupla['saldo'];
-                                    $tipo_conta = $tupla['saldo'];
+                                    $tipo_conta = $tupla['tipo_conta'];
+
+                                    $tipo_conta2; //tratando o valor que vem do banco para uma melhor exibição
+                                    if($tipo_conta === 'poupanca'){
+                                        $tipo_conta2 = "Poupança";
+                                    } else if($tipo_conta === 'especial'){
+                                        $tipo_conta2 = "Especial";
+                                    } else if($tipo_conta === 'corrente'){
+                                        $tipo_conta2 = "Corrente";
+                                    }
                                     
                                     //pegando o cpf do dono da conta em questão
                                     $stmt = $conexao->prepare("SELECT Clientes_cpf FROM Possui WHERE Contas_num_conta = $num_conta2");
@@ -162,7 +171,7 @@
                     
                                                 <div>
                                                     <h3 class="card-text">Tipo</h3>
-                                                    <p class="card-value"><?php echo $tipo_conta ?></p>
+                                                    <p class="card-value"><?php echo $tipo_conta2 ?></p>
                                                 </div>
                     
                                                 <div>

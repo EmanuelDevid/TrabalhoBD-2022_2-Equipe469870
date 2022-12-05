@@ -185,6 +185,11 @@
             <form class="modal-form" action="../php/transacao.php" method="POST">
                 <div class="content-separator endereco">
                     <div class="input-content">
+                        <label for="CPF">CPF do cliente</label>
+                        <input type="text" name="CPF" placeholder="Preencher campo" required>
+                    </div>
+
+                    <div class="input-content">
                         <label for="logradouro">Tipo de logradouro</label>
                         <input type="text" name="logradouro" placeholder="Preencher campo" required>
                     </div>
@@ -195,7 +200,7 @@
                     </div>
 
                     <div class="input-content">
-                        <label for="num_casa">Número</label>
+                        <label for="num_casa">Número da casa</label>
                         <input type="text" name="num_casa" placeholder="Preencher campo" required>
                     </div>
                     
@@ -230,38 +235,19 @@
             <form class="modal-form" action="../php/transacao.php" method="POST">
                 <div class="content-separator endereco">
                     <div class="input-content">
-                        <label for="logradouro">Tipo de logradouro</label>
-                        <input type="text" name="logradouro" placeholder="Preencher campo" required>
+                        <label for="matricula">Matricula do funcionário</label>
+                        <input type="text" name="matricula" placeholder="Preencher campo" required>
                     </div>
 
-                    <div class="input-content">
-                        <label for="nome_logradouro">Nome do logradouro</label>
-                        <input type="text" name="nome_logradouro" placeholder="Preencher campo" required>
-                    </div>
-
-                    <div class="input-content">
-                        <label for="num_casa">Número</label>
-                        <input type="text" name="num_casa" placeholder="Preencher campo" required>
-                    </div>
-                    
-                    <div class="input-content">
-                        <label for="bairro">Bairro</label>
-                        <input type="text" name="bairro" placeholder="Preencher campo" required>
-                    </div>
-
-                    <div class="input-content">
-                        <label for="cep">CEP</label>
-                        <input type="text" name="cep" placeholder="Preencher campo" required>
-                    </div>
-                    
                     <div class="input-content">
                         <label for="cidade">Cidade</label>
                         <input type="text" name="cidade" placeholder="Preencher campo" required>
                     </div>
 
                     <div class="input-content">
-                        <label for="estado">Estado</label>
-                        <input type="text" name="estado" placeholder="Preencher campo" required>
+                        <label for="endereco">Endereço</label>
+                        <small class="help">Ex. Rua da Paz, 287</small>
+                        <input type="text" name="endereco" placeholder="Preencher campo" required>
                     </div>
                 </div>
                 <button class="btn-submit-trasaction" type="submit">Confirmar</button>

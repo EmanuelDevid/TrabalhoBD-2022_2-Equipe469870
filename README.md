@@ -15,3 +15,35 @@ Este projeto foi proposto na disciplina de banco de dados, da Universidade Feder
 ### Público
 
 Comunidade da UFC 🎓
+
+## :star: Algumas telas da aplicação
+
+<p align="center">
+  <img src="./imagens/ScreenShots/Login.jpeg" alt="imagem da aplicação" />
+</p>
+
+<br>
+
+<p align="center">
+  <img src="./imagens/ScreenShots/Cadastro.jpeg" alt="imagem da aplicação" />
+</p>
+
+<br>
+
+<p align="center">
+  <img src="./imagens/ScreenShots/Contas.jpeg" alt="imagem da aplicação" />
+</p>
+
+<br>
+
+<p align="center">
+  <img src="./imagens/ScreenShots/User.jpeg" alt="imagem da aplicação" />
+</p>
+
+<br>
+
+<h3 align="center"> 
+	Status da Aplicação: Finalizado ✔️
+</h3>
+<br>
+
